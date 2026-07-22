@@ -6,160 +6,369 @@ import { topics, products, site } from '../config/site';
 <Base
   title="BN Material"
   description="Advanced materials research, scientific software, computational modeling, and reproducible engineering knowledge."
-  ><section class="container hero">
-    <div class="reveal">
-      <p class="eyebrow">Advancing materials. Empowering discovery.</p><h1>
-        Materials science for a better-engineered future.
-      </h1><p class="lead">
-        BN Material connects advanced materials research, computational modeling, scientific
-        characterization, and professional software into a rigorous platform for discovery,
-        analysis, and engineering decisions.
-      </p><div class="actions">
-        <a class="button" href="/research">Explore Research</a><a
-          class="button secondary"
-          href="/software">Discover Software</a
-        >
-      </div>
-    </div><div
-      class="hero-art"
-      role="img"
-      aria-label="Conceptual crystalline lattice and spectral analysis graphic"
-    >
-      <div class="lattice"></div><div class="rings"></div><div class="spectrum"></div>
-    </div>
-  </section><section>
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Research focus</p><h2>From atoms to engineered performance.</h2>
-        </div><p>
-          Research themes span functional materials, characterization, electronic structure,
-          spectroscopy, microscopy, and reproducible computational work.
-        </p>
-      </div><div class="grid">
-        <article class="card">
-          <span class="eyebrow">01 / Structure</span><h3>Materials characterization</h3><p>
-            X-ray diffraction, spectroscopy, microscopy, and careful interpretation of material
-            structure.
-          </p>
-        </article><article class="card">
-          <span class="eyebrow">02 / Models</span><h3>Computational insight</h3><p>
-            Electronic-structure and molecular models that connect mechanism with measurable
-            response.
-          </p>
-        </article><article class="card">
-          <span class="eyebrow">03 / Tools</span><h3>Scientific software</h3><p>
-            Purpose-built interfaces for traceable analysis and publication-oriented outputs.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section><section>
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Scientific software</p><h2>
-            Analysis environments built around the data.
-          </h2>
-        </div><a href="/software">View catalogue →</a>
-      </div><div class="grid">
-        {
-          products.map((p) => (
-            <a class="card" href={`/software/${p.slug}`}>
-              <>
-                <span class="status">{p.status}</span>
-                <h3>{p.name}</h3>
-                <p>{p.summary}</p>
-                <span>Explore capabilities →</span>
-              </>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section><section>
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Core framework</p><h2>
-            Structure → Processing → Properties → Performance
-          </h2>
+>
+  <section class="hero-home">
+    <canvas id="material-field" aria-hidden="true"></canvas>
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="shell hero-layout">
+      <div class="hero-copy">
+        <div class="hero-kicker">
+          <span class="live-dot"></span><span>Advancing materials. Empowering discovery.</span><b
+            >01 / 06</b
+          >
         </div>
-      </div><div class="framework">
-        {
-          ['Structure', 'Processing', 'Properties', 'Performance'].map((x, i) => (
-            <div>
+        <h1>
+          <span>Materials science</span><span>for a better—</span><span
+            ><em>engineered</em> future.</span
+          >
+        </h1>
+        <div class="hero-bottom">
+          <p>
+            Research, computational modeling, scientific characterization, and professional
+            software—connected in one rigorous platform.
+          </p>
+          <div class="actions">
+            <a class="button" href="/research"><span>Explore research</span><b>↗</b></a><a
+              class="button ghost"
+              href="/software"><span>Discover software</span><b>↓</b></a
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        class="hero-instrument"
+        aria-label="Animated conceptual material structure and spectral analysis interface"
+      >
+        <div class="instrument-head">
+          <span>Material field / live model</span><span>BN—MSE.01</span>
+        </div>
+        <div class="orbital"><i></i><i></i><i></i><b>BN</b></div>
+        <div class="axis axis-y"><span>INTENSITY</span></div>
+        <div class="signal"><i></i></div>
+        <div class="instrument-readout">
+          <span><b>STRUCTURE</b>HEXAGONAL FIELD</span><span><b>RESPONSE</b>SPECTRAL</span><span
+            ><b>MODE</b>CONCEPTUAL</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="shell scientific-ticker">
+      <span>PHYSICAL METALLURGY</span><i></i><span>COMPUTATIONAL MSE</span><i></i><span
+        >SPECTROSCOPY</span
+      ><i></i><span>MICROSCOPY</span><i></i><span>SCIENTIFIC SOFTWARE</span>
+    </div>
+  </section>
+
+  <section class="manifesto section-pad">
+    <div class="shell manifesto-layout">
+      <div class="section-meta" data-reveal>
+        <span class="section-index">01 / Research continuum</span><p>
+          Science is strongest when every scale speaks to the next.
+        </p>
+      </div>
+      <div class="manifesto-copy" data-reveal>
+        <h2>
+          We connect the <em>atomic</em> with the observable—and the observable with decisions.
+        </h2><p>
+          BN Material brings experimental evidence, computation, characterization, and purpose-built
+          analysis tools into a single, reproducible way of working.
+        </p>
+      </div>
+    </div>
+    <div class="shell focus-rail">
+      <a href="/research" class="focus-panel focus-primary" data-tilt data-reveal
+        ><span>01</span><div>
+          <small>Characterization</small><h3>Read structure from signal.</h3><p>
+            X-ray diffraction, spectroscopy, and microscopy interpreted with scientific restraint.
+          </p>
+        </div><b>↗</b><div class="focus-spectrum" aria-hidden="true"><i></i></div></a
+      >
+      <a href="/research" class="focus-panel focus-model" data-tilt data-reveal
+        ><span>02</span><div>
+          <small>Computation</small><h3>Model what cannot be seen.</h3><p>
+            Electronic-structure and molecular insight for mechanism-aware interpretation.
+          </p>
+        </div><b>↗</b><div class="atom-cluster" aria-hidden="true">
+          {Array.from({ length: 9 }).map((_, i) => <i style={`--i:${i}`} />)}
+        </div></a
+      >
+      <a href="/software" class="focus-panel focus-tools" data-tilt data-reveal
+        ><span>03</span><div>
+          <small>Scientific software</small><h3>Turn analysis into a system.</h3><p>
+            Focused environments for traceable workflows and publication-oriented output.
+          </p>
+        </div><b>↗</b><div class="code-field" aria-hidden="true">
+          <span>DATA / SIGNAL</span><span>METHOD / TRACE</span><span>OUTPUT / FIGURE</span>
+        </div></a
+      >
+    </div>
+  </section>
+
+  <section class="software-stage section-pad" id="software">
+    <div class="shell stage-head" data-reveal>
+      <div>
+        <span class="section-index">02 / Scientific software</span><h2>
+          Purpose-built tools.<br /><em>Zero black boxes.</em>
+        </h2>
+      </div><p>
+        Software should make scientific reasoning more visible—not hide it. Every product is
+        presented with an evidence-based status.
+      </p>
+    </div>
+    <div class="shell product-stack">
+      {
+        products.map((product, index) => (
+          <article
+            class:list={['product-showcase', `product-${product.accent}`]}
+            data-product
+            data-reveal
+          >
+            <div class="product-copy">
               <>
-                <span>0{i + 1}</span>
-                <h3>{x}</h3>
-                <p class="muted">
-                  {
-                    [
-                      'What a material is.',
-                      'How it is made.',
-                      'How it responds.',
-                      'How it works in context.',
-                    ][i]
-                  }
-                </p>
+                <div class="product-number">0{index + 1}</div>
+                <span class="status">
+                  <i />
+                  {product.status}
+                </span>
+                <p class="product-type">{product.category}</p>
+                <h3>{product.name}</h3>
+                <p>{product.summary}</p>
+                <a class="text-link" href={`/software/${product.slug}`}>
+                  Explore capabilities <span>↗</span>
+                </a>
               </>
             </div>
-          ))
-        }
-      </div>
+            <div class="workspace" aria-label={`Conceptual ${product.name} interface illustration`}>
+              <div class="workspace-bar">
+                <>
+                  <span>
+                    <>
+                      <i />
+                      <i />
+                      <i />
+                    </>
+                  </span>
+                  <b>{product.name}</b>
+                  <small>Concept interface</small>
+                </>
+              </div>
+              <div class="workspace-side">
+                <>
+                  <i />
+                  <i />
+                  <i />
+                  <i />
+                  <i />
+                </>
+              </div>
+              <div class="workspace-main">
+                <div class="chart-label">
+                  <>
+                    <span>Y / RESPONSE</span>
+                    <span>X / DOMAIN</span>
+                  </>
+                </div>
+                <div class:list={['product-chart', `chart-${index + 1}`]}>
+                  <i />
+                  {index === 1 &&
+                    Array.from({ length: 12 }).map((_, i) => <b style={`--n:${i}`} />)}
+                </div>
+                <div class="workspace-data">
+                  <>
+                    <span>
+                      <b>DATA</b>01
+                    </span>
+                    <span>
+                      <b>METHOD</b>TRACE
+                    </span>
+                    <span>
+                      <b>OUTPUT</b>FIGURE
+                    </span>
+                  </>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))
+      }
     </div>
-  </section><section>
-    <div class="container">
-      <div class="section-head">
-        <div><p class="eyebrow">Topic hubs</p><h2>Build understanding across scales.</h2></div>
-      </div><div class="grid">
-        {
-          topics.map((t) => (
-            <a class="card" href={`/topics/${t.slug}`}>
-              <>
-                <h3>{t.title}</h3>
-                <p>{t.summary}</p>
-                <span>Open topic →</span>
-              </>
-            </a>
-          ))
-        }
-      </div>
+  </section>
+
+  <section class="framework-stage section-pad">
+    <div class="shell framework-head" data-reveal>
+      <span class="section-index">03 / Materials framework</span><h2>
+        One continuous<br />engineering logic.
+      </h2><p>From what a material is to how it performs in the real world.</p>
     </div>
-  </section><section>
-    <div class="container grid">
-      <article class="card">
-        <p class="eyebrow">Research & publications</p><h3>Evidence before volume.</h3><p>
-          Publication architecture is ready for verified records. No titles, identifiers, or metrics
-          are invented.
-        </p><a href="/publications">View publications →</a>
-      </article><article class="card">
-        <p class="eyebrow">Resources & benchmarks</p><h3>Reproducible by design.</h3><p>
-          Methods, comparisons, and learning materials are structured to make assumptions and limits
-          visible.
-        </p><a href="/resources">Explore resources →</a>
-      </article><article class="card">
-        <p class="eyebrow">Academy & consulting</p><h3>Scientific depth, practical format.</h3><p>
-          Training and technical advisory pathways for laboratories, students, and R&D teams.
-        </p><a href="/consulting">Start an inquiry →</a>
+    <div class="shell framework-flow">
+      {
+        [
+          ['Structure', 'Atoms, phases, defects, interfaces', '01'],
+          ['Processing', 'Synthesis, history, transformation', '02'],
+          ['Properties', 'Mechanical, optical, thermal, electronic', '03'],
+          ['Performance', 'Function, reliability, context', '04'],
+        ].map(([label, copy, number], i) => (
+          <div class="flow-node" data-reveal>
+            <>
+              <div class="flow-orbit">
+                <>
+                  <span>{number}</span>
+                  <i />
+                  <i />
+                  <i />
+                </>
+              </div>
+              <h3>{label}</h3>
+              <p>{copy}</p>
+              {i < 3 && <b class="flow-arrow">→</b>}
+            </>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="topics-stage section-pad">
+    <div class="shell stage-head" data-reveal>
+      <div>
+        <span class="section-index">04 / Topic architecture</span><h2>
+          Explore materials<br /><em>by mechanism.</em>
+        </h2>
+      </div><a class="text-link" href="/topics">All topics <span>↗</span></a>
+    </div>
+    <div class="shell topic-list">
+      {
+        topics.map((topic, index) => (
+          <a href={`/topics/${topic.slug}`} data-reveal>
+            <>
+              <span>0{index + 1}</span>
+              <h3>{topic.title}</h3>
+              <p>{topic.summary}</p>
+              <b>↗</b>
+            </>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="evidence-stage section-pad">
+    <div class="shell evidence-grid">
+      <article class="evidence-main" data-reveal>
+        <span class="section-index">05 / Reproducible knowledge</span><h2>
+          Evidence before <em>volume.</em>
+        </h2><p>
+          Publications, benchmarks, and resources are designed around verified records, visible
+          assumptions, and reproducible methods.
+        </p><div class="actions">
+          <a class="button light" href="/publications"><span>Publications</span><b>↗</b></a><a
+            class="button line"
+            href="/resources"><span>Resources</span><b>↗</b></a
+          >
+        </div>
       </article>
+      <a class="evidence-card" href="/benchmarks" data-tilt data-reveal
+        ><span>BENCHMARKS</span><div class="benchmark-lines">
+          {Array.from({ length: 7 }).map((_, i) => <i style={`--w:${36 + i * 8}%`} />)}
+        </div><h3>Transparent comparisons.</h3><b>↗</b></a
+      >
+      <a class="evidence-card evidence-academy" href="/academy" data-tilt data-reveal
+        ><span>ACADEMY</span><div class="academy-mark">λ</div><h3>
+          Learn the workflow, not only the result.
+        </h3><b>↗</b></a
+      >
     </div>
-  </section><section>
-    <div class="container">
-      <div class="card">
-        <p class="eyebrow">Founder & ecosystem</p><h2>
-          Independent science, connected practice.
-        </h2><p class="lead">
-          Founded by {site.founder}, affiliated with {site.affiliation}. BN Material is an
-          independent platform and does not represent an official NAST website or institutional
-          endorsement.
-        </p><p>
-          <a href={site.sisterSite} target="_blank" rel="noopener noreferrer"
-            >Visit the sister site, bhijan.com.np ↗</a
-          >, for Bhijan Neupane’s personal research profile, professional portfolio, publications,
-          and related projects.
-        </p>
+  </section>
+
+  <section class="founder-stage section-pad">
+    <div class="shell founder-layout">
+      <div class="founder-mark" aria-hidden="true" data-reveal>
+        <span>B</span><span>N</span><i></i>
+      </div>
+      <div class="founder-copy" data-reveal>
+        <span class="section-index">06 / Independent platform</span><h2>
+          Built at the intersection of <em>research</em> and software.
+        </h2><p>
+          Founded by {site.founder}, affiliated with {site.affiliation}. BN Material is independent
+          and is not an official NAST website; affiliation does not imply institutional endorsement.
+        </p><a class="text-link" href={site.sisterSite} target="_blank" rel="noopener noreferrer"
+          >Visit the sister site, bhijan.com.np <span>↗</span></a
+        >
       </div>
     </div>
-  </section></Base
->
+  </section>
+
+  <script is:inline>
+    const canvas = document.querySelector('#material-field');
+    const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if (canvas && !reduce) {
+      const ctx = canvas.getContext('2d'),
+        nodes = [],
+        pointer = { x: -999, y: -999 };
+      let w, h, raf;
+      const resize = () => {
+        const d = Math.min(devicePixelRatio, 1.5);
+        w = canvas.clientWidth;
+        h = canvas.clientHeight;
+        canvas.width = w * d;
+        canvas.height = h * d;
+        ctx.setTransform(d, 0, 0, d, 0, 0);
+        nodes.length = 0;
+        const gap = Math.max(58, Math.min(84, w / 18));
+        for (let y = -gap; y < h + gap; y += gap * 0.86)
+          for (let x = -gap; x < w + gap; x += gap)
+            nodes.push({
+              x: x + ((Math.round(y / gap) % 2) * gap) / 2,
+              y,
+              ox: Math.random() * 6,
+              oy: Math.random() * 6,
+            });
+      };
+      const draw = (t) => {
+        ctx.clearRect(0, 0, w, h);
+        ctx.lineWidth = 0.55;
+        for (const n of nodes) {
+          const dx = pointer.x - n.x,
+            dy = pointer.y - n.y,
+            d = Math.hypot(dx, dy),
+            pull = Math.max(0, 1 - d / 220);
+          n.px = n.x - Math.sign(dx) * pull * 8 + Math.sin(t / 1800 + n.ox) * 2;
+          n.py = n.y - Math.sign(dy) * pull * 8 + Math.cos(t / 1600 + n.oy) * 2;
+        }
+        for (let i = 0; i < nodes.length; i++)
+          for (let j = i + 1; j < nodes.length; j++) {
+            const a = nodes[i],
+              b = nodes[j],
+              d = Math.hypot(a.px - b.px, a.py - b.py);
+            if (d < 92) {
+              ctx.strokeStyle = `rgba(119,225,255,${(1 - d / 92) * 0.14})`;
+              ctx.beginPath();
+              ctx.moveTo(a.px, a.py);
+              ctx.lineTo(b.px, b.py);
+              ctx.stroke();
+            }
+          }
+        for (const n of nodes) {
+          ctx.fillStyle = 'rgba(136,226,255,.32)';
+          ctx.beginPath();
+          ctx.arc(n.px, n.py, 1.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        raf = requestAnimationFrame(draw);
+      };
+      canvas.addEventListener('pointermove', (e) => {
+        const r = canvas.getBoundingClientRect();
+        pointer.x = e.clientX - r.left;
+        pointer.y = e.clientY - r.top;
+      });
+      canvas.addEventListener('pointerleave', () => (pointer.x = pointer.y = -999));
+      addEventListener('resize', resize, { passive: true });
+      resize();
+      raf = requestAnimationFrame(draw);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(raf);
+        else raf = requestAnimationFrame(draw);
+      });
+    }
+  </script>
+</Base>

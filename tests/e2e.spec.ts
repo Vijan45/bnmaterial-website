@@ -8,9 +8,7 @@ test('homepage and mobile navigation', async ({ page }) => {
     .getByRole('button', { name: 'Menu' })
     .click();
   await expect(
-    page
-      .getByRole('navigation', { name: 'Primary' })
-      .getByRole('link', { name: 'Software', exact: true }),
+    page.locator('nav[aria-label="Primary"] summary').filter({ hasText: 'Software' }),
   ).toBeVisible();
   await page.keyboard.press('Escape');
 });

@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { site, topics, products } from '../config/site';
+
 interface Props {
   title: string;
   description: string;
@@ -8,17 +9,8 @@ interface Props {
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url);
 const pageTitle = title === 'BN Material' ? title : `${title} | BN Material`;
-const nav = [
-  ['Topics', '/topics'],
-  ['Research', '/research'],
-  ['Software', '/software'],
-  ['Publications', '/publications'],
-  ['Resources', '/resources'],
-  ['About', '/about'],
-  ['Academy', '/academy'],
-  ['Consulting', '/consulting'],
-  ['Contact', '/contact'],
-];
+const path = Astro.url.pathname;
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -33,83 +25,232 @@ const jsonLd = [
 
 <!doctype html>
 <html lang="en">
-  <head
-    ><meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /><title>
-      {pageTitle}
-    </title><meta name="description" content={description} /><link
-      rel="canonical"
-      href={canonical}
-    /><meta property="og:title" content={pageTitle} /><meta
-      property="og:description"
-      content={description}
-    /><meta property="og:type" content="website" /><meta
-      property="og:url"
-      content={canonical}
-    /><meta property="og:image" content={`${site.url}/social-preview.svg`} /><meta
-      name="twitter:card"
-      content="summary_large_image"
-    /><link rel="icon" href="/favicon.svg" /><link rel="manifest" href="/site.webmanifest" /><script
-      type="application/ld+json"
-      set:html={JSON.stringify(jsonLd)}
-    /></head
-  ><body
-    ><a class="skip" href="#main">Skip to content</a><div class="identity">
-      INDEPENDENT MATERIALS-SCIENCE &amp; SCIENTIFIC-SOFTWARE PLATFORM
-    </div><header class="header">
-      <nav class="nav container" aria-label="Primary">
-        <a class="brand" href="/"
-          ><span class="mark" aria-hidden="true">BN</span><span>BN Material</span></a
-        ><button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button><div
-          class="links"
-          id="nav-links"
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#06080d" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${site.url}/og.png`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="ambient" aria-hidden="true"><i></i><i></i></div>
+    <div class="identity">
+      <span>Independent research &amp; software platform</span>
+      <span class="identity-framework"
+        >Structure <b>→</b> Processing <b>→</b> Properties <b>→</b> Performance</span
+      >
+    </div>
+    <header class="header">
+      <nav class="nav shell" aria-label="Primary">
+        <a class="brand" href="/" aria-label="BN Material home">
+          <span class="brand-symbol" aria-hidden="true"><i>B</i><i>N</i></span>
+          <span class="brand-copy"
+            ><strong>BN Material</strong><small>Materials intelligence</small></span
+          >
+        </a>
+        <button class="menu-btn" aria-expanded="false" aria-controls="nav-panel"
+          ><span></span><span></span><span></span><b>Menu</b></button
         >
-          {nav.map(([label, href]) => <a href={href}>{label}</a>)}
+        <div class="nav-panel" id="nav-panel">
+          <a class:list={['nav-link', { active: isActive('/research') }]} href="/research"
+            >Research</a
+          >
+          <details class="nav-group">
+            <summary class:list={['nav-link', { active: isActive('/topics') }]}
+              >Topics <span>⌄</span></summary
+            >
+            <div class="mega mega-topics">
+              <div class="mega-intro">
+                <small>Knowledge framework</small><strong>Materials science across scales.</strong
+                ><a href="/topics">Explore all topics <span>↗</span></a>
+              </div>
+              <div class="mega-links">
+                {
+                  topics.map((t, i) => (
+                    <a href={`/topics/${t.slug}`}>
+                      <>
+                        <span>0{i + 1}</span>
+                        <strong>{t.title}</strong>
+                        <small>{t.summary}</small>
+                      </>
+                    </a>
+                  ))
+                }
+              </div>
+            </div>
+          </details>
+          <details class="nav-group">
+            <summary class:list={['nav-link', { active: isActive('/software') }]}
+              >Software <span>⌄</span></summary
+            >
+            <div class="mega mega-software">
+              <div class="mega-intro">
+                <small>Scientific software</small><strong
+                  >Purpose-built analysis environments.</strong
+                ><a href="/software">View catalogue <span>↗</span></a>
+              </div>
+              <div class="mega-products">
+                {
+                  products.map((p) => (
+                    <a href={`/software/${p.slug}`}>
+                      <>
+                        <span class="status">{p.status}</span>
+                        <strong>{p.name}</strong>
+                        <small>{p.category}</small>
+                      </>
+                    </a>
+                  ))
+                }
+              </div>
+            </div>
+          </details>
+          <a class:list={['nav-link', { active: isActive('/publications') }]} href="/publications"
+            >Publications</a
+          >
+          <details class="nav-group">
+            <summary
+              class:list={[
+                'nav-link',
+                { active: isActive('/resources') || isActive('/benchmarks') },
+              ]}>Resources <span>⌄</span></summary
+            >
+            <div class="mini-menu">
+              <a href="/resources">Guides &amp; documentation</a><a href="/benchmarks">Benchmarks</a
+              ><a href="/academy">Academy</a><a href="/consulting">Consulting</a>
+            </div>
+          </details>
+          <a class:list={['nav-link', { active: isActive('/about') }]} href="/about">About</a>
+          <a class="nav-cta" href="/contact"><span>Start a conversation</span><b>↗</b></a>
         </div>
       </nav>
-    </header><main id="main"><slot /></main><footer class="footer">
-      <div class="container footer-grid">
-        <div>
-          <a class="brand" href="/"><span class="mark">BN</span><span>BN Material</span></a><p
-            class="muted"
-          >
-            Advanced materials research, scientific software, computational modeling, and
-            reproducible engineering knowledge.
-          </p><small
-            >Independent platform. Institutional affiliation does not imply endorsement.</small
-          >
-        </div><div>
-          <strong>Explore</strong><p>
-            <a href="/topics">Topics</a><br /><a href="/software">Software</a><br /><a
-              href="/research">Research</a
-            ><br /><a href="/resources">Resources</a>
-          </p>
-        </div><div>
-          <strong>Ecosystem</strong><p>
-            <a href={site.sisterSite} target="_blank" rel="noopener noreferrer">bhijan.com.np ↗</a
-            ><br /><a href="/privacy-policy">Privacy</a><br /><a href="/terms-of-use">Terms</a><br
-            /><a href="/disclaimer">Disclaimer</a>
-          </p>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="footer">
+      <div class="shell footer-top">
+        <div class="footer-statement" data-reveal>
+          <span class="section-index">BN / 2026</span>
+          <h2>Science that moves<br />from <em>signal</em> to insight.</h2>
+          <a class="text-link" href="/contact">Work with BN Material <span>↗</span></a>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <small>Platform</small><a href="/research">Research</a><a href="/software">Software</a
+            ><a href="/publications">Publications</a><a href="/resources">Resources</a>
+          </div>
+          <div>
+            <small>Organization</small><a href="/about">About</a><a href="/academy">Academy</a><a
+              href="/consulting">Consulting</a
+            ><a href="/contact">Contact</a>
+          </div>
+          <div>
+            <small>Elsewhere</small><a
+              href={site.sisterSite}
+              target="_blank"
+              rel="noopener noreferrer">bhijan.com.np ↗</a
+            ><a href="/privacy-policy">Privacy</a><a href="/terms-of-use">Terms</a><a
+              href="/disclaimer">Disclaimer</a
+            >
+          </div>
         </div>
       </div>
-    </footer><script is:inline>
-      const b = document.querySelector('.menu-btn'),
-        n = document.querySelector('#nav-links');
-      b?.addEventListener('click', () => {
-        const o = b.getAttribute('aria-expanded') === 'true';
-        b.setAttribute('aria-expanded', String(!o));
-        n?.classList.toggle('open', !o);
-        document.body.style.overflow = !o ? 'hidden' : '';
+      <div class="shell footer-bottom">
+        <span>© {new Date().getFullYear()} BN Material</span><span
+          >Independent scientific &amp; software platform</span
+        ><span>Built for rigorous discovery</span>
+      </div>
+    </footer>
+    <script is:inline>
+      const button = document.querySelector('.menu-btn');
+      const panel = document.querySelector('#nav-panel');
+      let lastFocus;
+      const closeMenu = () => {
+        button?.setAttribute('aria-expanded', 'false');
+        panel?.classList.remove('open');
+        document.body.classList.remove('menu-open');
+        document.querySelectorAll('.nav-group[open]').forEach((x) => x.removeAttribute('open'));
+      };
+      button?.addEventListener('click', () => {
+        const opening = button.getAttribute('aria-expanded') !== 'true';
+        button.setAttribute('aria-expanded', String(opening));
+        panel?.classList.toggle('open', opening);
+        document.body.classList.toggle('menu-open', opening);
+        if (opening) {
+          lastFocus = document.activeElement;
+          panel?.querySelector('a,summary')?.focus();
+        } else lastFocus?.focus();
       });
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          b?.setAttribute('aria-expanded', 'false');
-          n?.classList.remove('open');
-          document.body.style.overflow = '';
+        if (e.key === 'Escape') closeMenu();
+        if (e.key === 'Tab' && panel?.classList.contains('open')) {
+          const focusable = [button, ...panel.querySelectorAll('a,summary')];
+          const first = focusable[0],
+            last = focusable[focusable.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
         }
       });
+      panel?.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
+      document.querySelectorAll('.nav-group').forEach((d) =>
+        d.addEventListener('toggle', () => {
+          if (d.open)
+            document.querySelectorAll('.nav-group').forEach((other) => {
+              if (other !== d) other.removeAttribute('open');
+            });
+        }),
+      );
+      const reveals = document.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+              }
+            }),
+          { threshold: 0.12 },
+        );
+        reveals.forEach((el) => observer.observe(el));
+      } else reveals.forEach((el) => el.classList.add('revealed'));
+      if (matchMedia('(hover:hover) and (prefers-reduced-motion:no-preference)').matches) {
+        document.querySelectorAll('[data-tilt]').forEach((card) => {
+          card.addEventListener('pointermove', (e) => {
+            const r = card.getBoundingClientRect(),
+              x = (e.clientX - r.left) / r.width - 0.5,
+              y = (e.clientY - r.top) / r.height - 0.5;
+            card.style.setProperty('--rx', `${-y * 4}deg`);
+            card.style.setProperty('--ry', `${x * 5}deg`);
+            card.style.setProperty('--mx', `${(x + 0.5) * 100}%`);
+            card.style.setProperty('--my', `${(y + 0.5) * 100}%`);
+          });
+          card.addEventListener('pointerleave', () => {
+            card.style.setProperty('--rx', '0deg');
+            card.style.setProperty('--ry', '0deg');
+          });
+        });
+      }
       document.addEventListener('visibilitychange', () =>
         document.documentElement.classList.toggle('paused', document.hidden),
       );
-    </script></body
-  >
+    </script>
+  </body>
 </html>

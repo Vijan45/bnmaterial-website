@@ -1,0 +1,165 @@
+---
+import Base from '../layouts/Base.astro';
+import { topics, products, site } from '../config/site';
+---
+
+<Base
+  title="BN Material"
+  description="Advanced materials research, scientific software, computational modeling, and reproducible engineering knowledge."
+  ><section class="container hero">
+    <div class="reveal">
+      <p class="eyebrow">Advancing materials. Empowering discovery.</p><h1>
+        Materials science for a better-engineered future.
+      </h1><p class="lead">
+        BN Material connects advanced materials research, computational modeling, scientific
+        characterization, and professional software into a rigorous platform for discovery,
+        analysis, and engineering decisions.
+      </p><div class="actions">
+        <a class="button" href="/research">Explore Research</a><a
+          class="button secondary"
+          href="/software">Discover Software</a
+        >
+      </div>
+    </div><div
+      class="hero-art"
+      role="img"
+      aria-label="Conceptual crystalline lattice and spectral analysis graphic"
+    >
+      <div class="lattice"></div><div class="rings"></div><div class="spectrum"></div>
+    </div>
+  </section><section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Research focus</p><h2>From atoms to engineered performance.</h2>
+        </div><p>
+          Research themes span functional materials, characterization, electronic structure,
+          spectroscopy, microscopy, and reproducible computational work.
+        </p>
+      </div><div class="grid">
+        <article class="card">
+          <span class="eyebrow">01 / Structure</span><h3>Materials characterization</h3><p>
+            X-ray diffraction, spectroscopy, microscopy, and careful interpretation of material
+            structure.
+          </p>
+        </article><article class="card">
+          <span class="eyebrow">02 / Models</span><h3>Computational insight</h3><p>
+            Electronic-structure and molecular models that connect mechanism with measurable
+            response.
+          </p>
+        </article><article class="card">
+          <span class="eyebrow">03 / Tools</span><h3>Scientific software</h3><p>
+            Purpose-built interfaces for traceable analysis and publication-oriented outputs.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section><section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Scientific software</p><h2>
+            Analysis environments built around the data.
+          </h2>
+        </div><a href="/software">View catalogue →</a>
+      </div><div class="grid">
+        {
+          products.map((p) => (
+            <a class="card" href={`/software/${p.slug}`}>
+              <>
+                <span class="status">{p.status}</span>
+                <h3>{p.name}</h3>
+                <p>{p.summary}</p>
+                <span>Explore capabilities →</span>
+              </>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section><section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Core framework</p><h2>
+            Structure → Processing → Properties → Performance
+          </h2>
+        </div>
+      </div><div class="framework">
+        {
+          ['Structure', 'Processing', 'Properties', 'Performance'].map((x, i) => (
+            <div>
+              <>
+                <span>0{i + 1}</span>
+                <h3>{x}</h3>
+                <p class="muted">
+                  {
+                    [
+                      'What a material is.',
+                      'How it is made.',
+                      'How it responds.',
+                      'How it works in context.',
+                    ][i]
+                  }
+                </p>
+              </>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section><section>
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow">Topic hubs</p><h2>Build understanding across scales.</h2></div>
+      </div><div class="grid">
+        {
+          topics.map((t) => (
+            <a class="card" href={`/topics/${t.slug}`}>
+              <>
+                <h3>{t.title}</h3>
+                <p>{t.summary}</p>
+                <span>Open topic →</span>
+              </>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section><section>
+    <div class="container grid">
+      <article class="card">
+        <p class="eyebrow">Research & publications</p><h3>Evidence before volume.</h3><p>
+          Publication architecture is ready for verified records. No titles, identifiers, or metrics
+          are invented.
+        </p><a href="/publications">View publications →</a>
+      </article><article class="card">
+        <p class="eyebrow">Resources & benchmarks</p><h3>Reproducible by design.</h3><p>
+          Methods, comparisons, and learning materials are structured to make assumptions and limits
+          visible.
+        </p><a href="/resources">Explore resources →</a>
+      </article><article class="card">
+        <p class="eyebrow">Academy & consulting</p><h3>Scientific depth, practical format.</h3><p>
+          Training and technical advisory pathways for laboratories, students, and R&D teams.
+        </p><a href="/consulting">Start an inquiry →</a>
+      </article>
+    </div>
+  </section><section>
+    <div class="container">
+      <div class="card">
+        <p class="eyebrow">Founder & ecosystem</p><h2>
+          Independent science, connected practice.
+        </h2><p class="lead">
+          Founded by {site.founder}, affiliated with {site.affiliation}. BN Material is an
+          independent platform and does not represent an official NAST website or institutional
+          endorsement.
+        </p><p>
+          <a href={site.sisterSite} target="_blank" rel="noopener noreferrer"
+            >Visit the sister site, bhijan.com.np ↗</a
+          >, for Bhijan Neupane’s personal research profile, professional portfolio, publications,
+          and related projects.
+        </p>
+      </div>
+    </div>
+  </section></Base
+>

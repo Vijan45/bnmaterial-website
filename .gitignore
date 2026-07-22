@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+.env*
+!.env.example
+.dev.vars
+*.pem
+*.key
+*.p12
+secrets.*
+playwright-report/
+test-results/

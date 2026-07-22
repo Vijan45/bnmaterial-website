@@ -1,0 +1,115 @@
+---
+import '../styles/global.css';
+import { site, topics, products } from '../config/site';
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url);
+const pageTitle = title === 'BN Material' ? title : `${title} | BN Material`;
+const nav = [
+  ['Topics', '/topics'],
+  ['Research', '/research'],
+  ['Software', '/software'],
+  ['Publications', '/publications'],
+  ['Resources', '/resources'],
+  ['About', '/about'],
+  ['Academy', '/academy'],
+  ['Consulting', '/consulting'],
+  ['Contact', '/contact'],
+];
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: site.name,
+    url: site.url,
+    founder: { '@type': 'Person', name: site.founder },
+  },
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url: site.url },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head
+    ><meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /><title>
+      {pageTitle}
+    </title><meta name="description" content={description} /><link
+      rel="canonical"
+      href={canonical}
+    /><meta property="og:title" content={pageTitle} /><meta
+      property="og:description"
+      content={description}
+    /><meta property="og:type" content="website" /><meta
+      property="og:url"
+      content={canonical}
+    /><meta property="og:image" content={`${site.url}/social-preview.svg`} /><meta
+      name="twitter:card"
+      content="summary_large_image"
+    /><link rel="icon" href="/favicon.svg" /><link rel="manifest" href="/site.webmanifest" /><script
+      type="application/ld+json"
+      set:html={JSON.stringify(jsonLd)}
+    /></head
+  ><body
+    ><a class="skip" href="#main">Skip to content</a><div class="identity">
+      INDEPENDENT MATERIALS-SCIENCE &amp; SCIENTIFIC-SOFTWARE PLATFORM
+    </div><header class="header">
+      <nav class="nav container" aria-label="Primary">
+        <a class="brand" href="/"
+          ><span class="mark" aria-hidden="true">BN</span><span>BN Material</span></a
+        ><button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button><div
+          class="links"
+          id="nav-links"
+        >
+          {nav.map(([label, href]) => <a href={href}>{label}</a>)}
+        </div>
+      </nav>
+    </header><main id="main"><slot /></main><footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand" href="/"><span class="mark">BN</span><span>BN Material</span></a><p
+            class="muted"
+          >
+            Advanced materials research, scientific software, computational modeling, and
+            reproducible engineering knowledge.
+          </p><small
+            >Independent platform. Institutional affiliation does not imply endorsement.</small
+          >
+        </div><div>
+          <strong>Explore</strong><p>
+            <a href="/topics">Topics</a><br /><a href="/software">Software</a><br /><a
+              href="/research">Research</a
+            ><br /><a href="/resources">Resources</a>
+          </p>
+        </div><div>
+          <strong>Ecosystem</strong><p>
+            <a href={site.sisterSite} target="_blank" rel="noopener noreferrer">bhijan.com.np ↗</a
+            ><br /><a href="/privacy-policy">Privacy</a><br /><a href="/terms-of-use">Terms</a><br
+            /><a href="/disclaimer">Disclaimer</a>
+          </p>
+        </div>
+      </div>
+    </footer><script is:inline>
+      const b = document.querySelector('.menu-btn'),
+        n = document.querySelector('#nav-links');
+      b?.addEventListener('click', () => {
+        const o = b.getAttribute('aria-expanded') === 'true';
+        b.setAttribute('aria-expanded', String(!o));
+        n?.classList.toggle('open', !o);
+        document.body.style.overflow = !o ? 'hidden' : '';
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          b?.setAttribute('aria-expanded', 'false');
+          n?.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      });
+      document.addEventListener('visibilitychange', () =>
+        document.documentElement.classList.toggle('paused', document.hidden),
+      );
+    </script></body
+  >
+</html>

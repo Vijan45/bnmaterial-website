@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { topics } from '../../config/site';
+---
+
+<Base
+  title="Materials Science Topics"
+  description="Explore BN Material topic hubs across physical metallurgy, mechanics, defects, functional materials, processing, and computation."
+  ><section class="page-hero container">
+    <p class="eyebrow">Topic hubs</p><h1>Materials knowledge, organized by mechanism.</h1><p
+      class="lead"
+    >
+      Rigorous starting points for connecting material structure with processing, properties, and
+      performance.
+    </p>
+  </section><section>
+    <div class="container grid">
+      {
+        topics.map((t) => (
+          <a class="card" href={`/topics/${t.slug}`}>
+            <>
+              <h3>{t.title}</h3>
+              <p>{t.summary}</p>
+              <span>Explore topic →</span>
+            </>
+          </a>
+        ))
+      }
+    </div>
+  </section></Base
+>

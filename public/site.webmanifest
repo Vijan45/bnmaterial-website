@@ -1,0 +1,9 @@
+{
+  "name": "BN Material",
+  "short_name": "BN Material",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050913",
+  "theme_color": "#050913",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

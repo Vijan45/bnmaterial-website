@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import { products } from '../../config/site';
+---
+
+<Base
+  title="Scientific Software"
+  description="Explore BN Material scientific software for spectroscopy, SEM image analysis, and thermal analysis."
+  ><section class="page-hero container">
+    <p class="eyebrow">Software catalogue</p><h1>
+      Scientific interfaces that keep analysis traceable.
+    </h1><p class="lead">
+      Each status reflects the supplied evidence. No product is presented as publicly downloadable
+      without a reviewed release and licence.
+    </p>
+  </section><section>
+    <div class="container grid">
+      {
+        products.map((p) => (
+          <a class="card" href={`/software/${p.slug}`}>
+            <>
+              <span class="status">{p.status}</span>
+              <h3>{p.name}</h3>
+              <p>{p.summary}</p>
+              <span>View product →</span>
+            </>
+          </a>
+        ))
+      }
+    </div>
+  </section></Base
+>

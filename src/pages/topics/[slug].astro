@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import { topics } from '../../config/site';
+export function getStaticPaths() {
+  return topics.map((topic) => ({ params: { slug: topic.slug }, props: { topic } }));
+}
+const { topic } = Astro.props;
+---
+
+<Base title={topic.title} description={`${topic.summary} A BN Material topic hub.`}
+  ><section class="page-hero container">
+    <p class="eyebrow">Topic hub / Materials science</p><h1>{topic.title}</h1><p class="lead">
+      {topic.summary}
+    </p>
+  </section><section>
+    <div class="container prose">
+      <h2>Scope</h2><p>
+        This hub is designed to connect foundational concepts, characterization approaches,
+        computational methods, and engineering implications without overstating evidence.
+      </p><h2>Learning pathway</h2><ul>
+        <li>Establish the governing structure and mechanisms.</li><li>
+          Connect process history with observable response.
+        </li><li>Compare experimental and computational evidence.</li><li>
+          Document assumptions, uncertainty, and reproducibility.
+        </li>
+      </ul><p class="muted">
+        Curated articles, datasets, and verified references can be added through the content layer
+        as they become available.
+      </p>
+    </div>
+  </section></Base
+>

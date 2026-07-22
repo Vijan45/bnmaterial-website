@@ -1,0 +1,127 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config/site';
+const pages = {
+  research: {
+    title: 'Research',
+    description:
+      'Research themes across materials science, nanotechnology, characterization, computation, and scientific software.',
+    eyebrow: 'Research platform',
+    headline: 'Mechanism-led research across experiment and computation.',
+    body: 'BN Material focuses on materials science and nanotechnology, activated carbon and biomass-derived functional materials, ZnO and metal oxides, density functional theory, molecular modeling, spectroscopy, X-ray diffraction, microscopy, image analysis, and scientific software development.',
+  },
+  publications: {
+    title: 'Publications',
+    description: 'Verified publications and research outputs from the BN Material ecosystem.',
+    eyebrow: 'Publications',
+    headline: 'Verified records, structured for discovery.',
+    body: 'No verified publication list was supplied with this project. The publication data model is ready for titles, authors, years, journals, DOIs, topics, links, citation exports, search, and featured records once authoritative source data are provided.',
+  },
+  benchmarks: {
+    title: 'Benchmarks',
+    description: 'Transparent scientific-software and analysis benchmarks from BN Material.',
+    eyebrow: 'Benchmarks',
+    headline: 'Comparisons that reveal assumptions and limits.',
+    body: 'Benchmark entries will document datasets, versions, methods, environments, metrics, and interpretation. No benchmark results are published until the underlying evidence is supplied and reviewable.',
+  },
+  resources: {
+    title: 'Resources',
+    description:
+      'Guides, benchmarks, learning resources, and software documentation from BN Material.',
+    eyebrow: 'Knowledge resources',
+    headline: 'Reproducible knowledge for serious materials work.',
+    body: 'This section is prepared for guides, learning resources, benchmark reports, and software documentation. Resources will distinguish measured evidence from conceptual explanation and record relevant versions and methods.',
+  },
+  academy: {
+    title: 'Academy',
+    description: 'Materials-science and scientific-software learning pathways from BN Material.',
+    eyebrow: 'BN Material Academy',
+    headline: 'Learn the science. Understand the workflow.',
+    body: 'Future training can support graduate students, laboratories, universities, and R&D teams across characterization, computation, data interpretation, and scientific-software practice.',
+  },
+  consulting: {
+    title: 'Consulting',
+    description:
+      'Independent materials-science, characterization, computational modeling, and software consulting inquiries.',
+    eyebrow: 'Scientific consulting',
+    headline: 'Technical depth for consequential engineering decisions.',
+    body: 'Inquiry pathways cover research planning, materials characterization strategy, computational workflows, analysis-system design, training, and reproducibility. Scope and institutional boundaries are clarified before any engagement.',
+  },
+  about: {
+    title: 'About',
+    description:
+      'About BN Material, its independent scientific mission, founder, and sister-site ecosystem.',
+    eyebrow: 'About BN Material',
+    headline: 'An independent platform for materials intelligence.',
+    body: `BN Material is developed by ${site.founder}, affiliated with ${site.affiliation}. It is an independent scientific and software platform—not an official NAST website, and the affiliation does not imply institutional endorsement.`,
+  },
+  'privacy-policy': {
+    title: 'Privacy Policy',
+    description: 'How BN Material handles website inquiries and visitor information.',
+    eyebrow: 'Legal',
+    headline: 'Privacy policy',
+    body: 'BN Material minimizes personal-data collection. This static website does not use advertising trackers. If you initiate an email inquiry, your message and contact details are used to respond. A future form endpoint must document its processor, retention, and security practices before activation.',
+  },
+  'terms-of-use': {
+    title: 'Terms of Use',
+    description: 'Terms governing use of the BN Material website and informational resources.',
+    eyebrow: 'Legal',
+    headline: 'Terms of use',
+    body: 'Website material is provided for general scientific and educational information. It is not a substitute for project-specific engineering, safety, legal, or commercial advice. Software access and licensing require separate written terms.',
+  },
+  disclaimer: {
+    title: 'Disclaimer',
+    description: 'Scientific, institutional, and software disclaimers for BN Material.',
+    eyebrow: 'Legal',
+    headline: 'Disclaimer',
+    body: 'BN Material is independent. References to the founder’s affiliation identify professional context and do not imply that NAST operates, endorses, or warrants this platform or its software. Conceptual product graphics are not experimental results.',
+  },
+};
+export function getStaticPaths() {
+  return [
+    'research',
+    'publications',
+    'benchmarks',
+    'resources',
+    'academy',
+    'consulting',
+    'about',
+    'privacy-policy',
+    'terms-of-use',
+    'disclaimer',
+  ].map((slug) => ({ params: { slug }, props: { slug } }));
+}
+const { slug } = Astro.props;
+const page = pages[slug as keyof typeof pages];
+---
+
+<Base title={page.title} description={page.description}
+  ><section class="page-hero container">
+    <p class="eyebrow">{page.eyebrow}</p><h1>{page.headline}</h1><p class="lead">{page.body}</p>{
+      slug === 'about' && (
+        <p>
+          <a href={site.sisterSite} target="_blank" rel="noopener noreferrer">
+            Visit sister site bhijan.com.np ↗
+          </a>
+        </p>
+      )
+    }
+  </section><section>
+    <div class="container grid">
+      <article class="card">
+        <h2>Scientific accuracy</h2><p>
+          Claims are kept conservative and are expanded only when source evidence is available.
+        </p>
+      </article><article class="card">
+        <h2>Reproducible practice</h2><p>
+          Methods, versions, assumptions, and limitations belong alongside every result.
+        </p>
+      </article><article class="card">
+        <h2>Connected ecosystem</h2><p>
+          Research, software, resources, training, and technical collaboration share a common
+          structure.
+        </p>
+      </article>
+    </div>
+  </section></Base
+>

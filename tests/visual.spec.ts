@@ -37,5 +37,5 @@ test('reduced motion leaves primary content visible', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-  await expect(page.locator('.manifesto-copy')).toBeVisible();
+  await expect(page.locator('.research-copy')).toBeVisible();
 });

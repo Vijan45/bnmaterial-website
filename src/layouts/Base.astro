@@ -314,6 +314,231 @@ const jsonLd = [
           });
         });
       }
+
+      const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
+      const canvasRecords = [];
+      const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+      const setupCanvas = (canvas, draw) => {
+        const record = { canvas, draw, visible: true, width: 0, height: 0 };
+        const resize = () => {
+          const rect = canvas.getBoundingClientRect();
+          const dpr = Math.min(devicePixelRatio || 1, 1.5);
+          const width = Math.max(1, Math.round(rect.width * dpr));
+          const height = Math.max(1, Math.round(rect.height * dpr));
+          if (canvas.width !== width || canvas.height !== height) {
+            canvas.width = width;
+            canvas.height = height;
+          }
+          record.width = rect.width;
+          record.height = rect.height;
+          record.dpr = dpr;
+          draw(record, 0);
+        };
+        record.resize = resize;
+        canvasRecords.push(record);
+        resize();
+        new ResizeObserver(resize).observe(canvas);
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(
+            ([entry]) => {
+              record.visible = entry.isIntersecting;
+            },
+            { rootMargin: '120px' },
+          ).observe(canvas);
+        }
+        return record;
+      };
+
+      const fieldCanvas = document.querySelector('[data-field-canvas]');
+      if (fieldCanvas) {
+        const nodes = Array.from({ length: innerWidth < 700 ? 24 : 38 }, (_, index) => ({
+          x: ((index * 47) % 101) / 100,
+          y: ((index * 71 + 13) % 97) / 100,
+          r: 0.8 + ((index * 11) % 17) / 10,
+          phase: index * 0.73,
+          speed: 0.45 + (index % 5) * 0.08,
+        }));
+
+        setupCanvas(fieldCanvas, (record, time) => {
+          const { canvas, width, height, dpr } = record;
+          const context = canvas.getContext('2d');
+          if (!context || !width || !height) return;
+          context.setTransform(dpr, 0, 0, dpr, 0, 0);
+          context.clearRect(0, 0, width, height);
+          const tick = motionQuery.matches ? 0 : time * 0.00016;
+          const points = nodes.map((node, index) => ({
+            x:
+              width *
+              clamp(
+                node.x + Math.sin(tick * node.speed + node.phase) * (0.012 + (index % 3) * 0.004),
+                0.035,
+                0.965,
+              ),
+            y:
+              height *
+              clamp(node.y + Math.cos(tick * node.speed * 0.9 + node.phase) * 0.018, 0.035, 0.965),
+            r: node.r,
+            phase: node.phase,
+          }));
+
+          for (let a = 0; a < points.length; a += 1) {
+            for (let b = a + 1; b < points.length; b += 1) {
+              const dx = points[a].x - points[b].x;
+              const dy = points[a].y - points[b].y;
+              const distance = Math.hypot(dx, dy);
+              const limit = Math.min(width, height) * 0.19;
+              if (distance < limit) {
+                context.beginPath();
+                context.moveTo(points[a].x, points[a].y);
+                context.lineTo(points[b].x, points[b].y);
+                context.strokeStyle = `rgba(122, 210, 255, ${0.12 * (1 - distance / limit)})`;
+                context.lineWidth = 0.7;
+                context.stroke();
+              }
+            }
+          }
+
+          points.forEach((point, index) => {
+            const pulse = 0.7 + Math.sin(tick * 3 + point.phase) * 0.25;
+            const gradient = context.createRadialGradient(
+              point.x,
+              point.y,
+              0,
+              point.x,
+              point.y,
+              point.r * 5,
+            );
+            const warm = index % 11 === 0;
+            gradient.addColorStop(
+              0,
+              warm ? 'rgba(255, 160, 225, .95)' : 'rgba(201, 255, 250, .95)',
+            );
+            gradient.addColorStop(
+              0.22,
+              warm ? 'rgba(239, 112, 202, .48)' : 'rgba(111, 230, 216, .52)',
+            );
+            gradient.addColorStop(1, 'rgba(111, 230, 216, 0)');
+            context.beginPath();
+            context.arc(point.x, point.y, point.r * 5 * pulse, 0, Math.PI * 2);
+            context.fillStyle = gradient;
+            context.fill();
+          });
+        });
+      }
+
+      document.querySelectorAll('[data-product-signal]').forEach((canvas) => {
+        const kind = canvas.dataset.productSignal;
+        setupCanvas(canvas, (record, time) => {
+          const { canvas, width, height, dpr } = record;
+          const context = canvas.getContext('2d');
+          if (!context || !width || !height) return;
+          context.setTransform(dpr, 0, 0, dpr, 0, 0);
+          context.clearRect(0, 0, width, height);
+          const accent = getComputedStyle(canvas.closest('.software-entry'))
+            .getPropertyValue('--accent')
+            .trim();
+          const tick = motionQuery.matches ? 0 : time * 0.001;
+
+          context.strokeStyle = 'rgba(190, 199, 235, .08)';
+          context.lineWidth = 1;
+          for (let x = 0; x <= width; x += width / 8) {
+            context.beginPath();
+            context.moveTo(x, 0);
+            context.lineTo(x, height);
+            context.stroke();
+          }
+          for (let y = 0; y <= height; y += height / 4) {
+            context.beginPath();
+            context.moveTo(0, y);
+            context.lineTo(width, y);
+            context.stroke();
+          }
+
+          if (kind === 'micrograph') {
+            for (let index = 0; index < 44; index += 1) {
+              const x = ((index * 83) % 101) * (width / 100);
+              const y = ((index * 47 + 11) % 97) * (height / 100);
+              const radius = 3 + ((index * 7) % 12);
+              context.beginPath();
+              context.arc(x, y, radius, 0, Math.PI * 2);
+              context.fillStyle = `rgba(165, 176, 195, ${0.07 + (index % 4) * 0.025})`;
+              context.fill();
+              if (index % 9 === 0) {
+                const scan = 0.55 + Math.sin(tick * 1.4 + index) * 0.22;
+                context.strokeStyle = accent;
+                context.globalAlpha = scan;
+                context.strokeRect(x - radius - 3, y - radius - 3, radius * 2 + 6, radius * 2 + 6);
+                context.globalAlpha = 1;
+              }
+            }
+          } else {
+            const peaks =
+              kind === 'thermal'
+                ? [
+                    [0.26, 0.14, 0.55],
+                    [0.48, 0.09, 0.86],
+                    [0.71, 0.17, 0.64],
+                  ]
+                : [
+                    [0.17, 0.038, 0.48],
+                    [0.34, 0.025, 0.9],
+                    [0.56, 0.045, 0.66],
+                    [0.8, 0.03, 0.82],
+                  ];
+            context.beginPath();
+            for (let x = 0; x <= width; x += 2) {
+              const progress = x / width;
+              let signal = kind === 'thermal' ? 0.07 + progress * 0.18 : 0.03;
+              peaks.forEach(([center, spread, heightValue]) => {
+                signal += heightValue * Math.exp(-Math.pow((progress - center) / spread, 2));
+              });
+              const y = height - 10 - signal * (height - 22);
+              if (x === 0) context.moveTo(x, y);
+              else context.lineTo(x, y);
+            }
+            context.strokeStyle = accent;
+            context.lineWidth = 1.8;
+            context.shadowColor = accent;
+            context.shadowBlur = 9;
+            context.stroke();
+            context.shadowBlur = 0;
+          }
+
+          const scanX = ((tick * 32) % (width + 50)) - 25;
+          const scanGradient = context.createLinearGradient(scanX - 18, 0, scanX + 18, 0);
+          scanGradient.addColorStop(0, 'rgba(255,255,255,0)');
+          scanGradient.addColorStop(0.5, 'rgba(255,255,255,.16)');
+          scanGradient.addColorStop(1, 'rgba(255,255,255,0)');
+          context.fillStyle = scanGradient;
+          context.fillRect(scanX - 18, 0, 36, height);
+        });
+      });
+
+      let animationFrame;
+      let lastCanvasFrame = 0;
+      const renderCanvases = (time) => {
+        if (time - lastCanvasFrame >= 32) {
+          canvasRecords.forEach((record) => {
+            if (record.visible) record.draw(record, time);
+          });
+          lastCanvasFrame = time;
+        }
+        if (!motionQuery.matches && !document.hidden) {
+          animationFrame = requestAnimationFrame(renderCanvases);
+        }
+      };
+      const restartCanvases = () => {
+        cancelAnimationFrame(animationFrame);
+        lastCanvasFrame = 0;
+        canvasRecords.forEach((record) => record.draw(record, 0));
+        if (!motionQuery.matches && !document.hidden) {
+          animationFrame = requestAnimationFrame(renderCanvases);
+        }
+      };
+      motionQuery.addEventListener?.('change', restartCanvases);
+      document.addEventListener('visibilitychange', restartCanvases);
+      restartCanvases();
     </script>
   </body>
 </html>

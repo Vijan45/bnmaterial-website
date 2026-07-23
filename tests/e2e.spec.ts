@@ -40,3 +40,40 @@ test('canonical routes and metadata', async ({ page }) => {
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.+/);
   }
 });
+
+test('scientific visual system renders and animates without browser errors', async ({ page }) => {
+  const browserErrors: string[] = [];
+  page.on('pageerror', (error) => browserErrors.push(error.message));
+  page.on('console', (message) => {
+    if (message.type() === 'error') browserErrors.push(message.text());
+  });
+
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  await page.waitForTimeout(180);
+
+  await expect(page.locator('canvas')).toHaveCount(4);
+  const canvasesDrawn = await page.locator('canvas').evaluateAll((canvases) =>
+    canvases.every((canvas) => {
+      const canvasElement = canvas as HTMLCanvasElement;
+      const context = canvasElement.getContext('2d');
+      if (!context || canvasElement.width === 0 || canvasElement.height === 0) return false;
+      const pixels = context.getImageData(
+        0,
+        0,
+        Math.min(canvasElement.width, 120),
+        Math.min(canvasElement.height, 80),
+      ).data;
+      for (let index = 3; index < pixels.length; index += 4) {
+        if ((pixels[index] ?? 0) > 0) return true;
+      }
+      return false;
+    }),
+  );
+  expect(canvasesDrawn).toBe(true);
+
+  for (const selector of ['.hero-glow-a', '.spectrum-halo-wide', '.curve-a', '.spectrum-core']) {
+    await expect(page.locator(selector)).not.toHaveCSS('animation-name', 'none');
+  }
+  expect(browserErrors).toEqual([]);
+});

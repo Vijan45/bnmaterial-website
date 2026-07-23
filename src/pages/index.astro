@@ -48,9 +48,10 @@ const capabilities = [
 
       <div class="hero-spectrum" data-reveal aria-label="Conceptual multiscale materials field">
         <div class="spectrum-topline">
-          <span>Material response field</span>
-          <small>Conceptual visualization</small>
+          <span><i></i> Material response field</span>
+          <small>Live conceptual visualization</small>
         </div>
+        <canvas class="field-canvas" data-field-canvas aria-hidden="true"></canvas>
         <svg viewBox="0 0 700 620" role="img" aria-labelledby="spectrum-title spectrum-desc">
           <title id="spectrum-title">Connected materials engineering scales</title>
           <desc id="spectrum-desc">
@@ -104,6 +105,11 @@ const capabilities = [
             </g>
           </g>
         </svg>
+        <div class="field-readouts" aria-hidden="true">
+          <span>Electronic state</span>
+          <span>Atomic structure</span>
+          <span>Phase response</span>
+        </div>
         <div class="spectrum-footer">
           <span>Composition</span><i></i><span>Structure</span><i></i><span>Process</span><i
           ></i><span>Performance</span>
@@ -240,12 +246,8 @@ const capabilities = [
               <b>↗</b>
             </div>
             <div class={`software-signal signal-${product.visual}`} aria-hidden="true">
-              <>
-                <i />
-                <i />
-                <i />
-                <i />
-              </>
+              <canvas data-product-signal={product.visual} />
+              <span>Live analytical field</span>
             </div>
           </a>
         ))

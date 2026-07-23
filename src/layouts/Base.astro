@@ -36,7 +36,7 @@ const jsonLd = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#07131b" />
+    <meta name="theme-color" content="#05020d" />
     <meta name="color-scheme" content="dark light" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
@@ -46,13 +46,20 @@ const jsonLd = [
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={`${site.url}/og.png`} />
+    <meta
+      property="og:image:alt"
+      content="BN Material — Materials engineered for what comes next."
+    />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${site.url}/og.png`} />
     <link rel="icon" href="/favicon.svg" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <script is:inline>
@@ -62,17 +69,20 @@ const jsonLd = [
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="site-noise" aria-hidden="true"></div>
+    <div class="site-aurora" aria-hidden="true"></div>
     <header class="site-header">
       <div class="utility-bar">
         <div class="shell utility-inner">
-          <span>Independent materials-science and scientific-software platform</span>
-          <span>Research ecosystem · Nepal</span>
+          <span>Materials science · computation · scientific software</span>
+          <span>Independent research platform · Nepal</span>
         </div>
       </div>
       <nav class="shell main-nav" aria-label="Primary navigation">
         <a class="brand" href="/" aria-label="BN Material home">
-          <img src="/brand/bn-material-logo.svg" alt="BN Material" />
+          <span class="brand-mark" aria-hidden="true">BN<i></i></span>
+          <span class="brand-name"
+            ><strong>BN Material</strong><small>Science in motion.</small></span
+          >
         </a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-panel">
           <span></span><span></span><span></span><b>Menu</b>
@@ -81,14 +91,14 @@ const jsonLd = [
           <a class:list={['nav-item', { active: isActive('/') }]} href="/">Home</a>
           <details class="nav-dropdown">
             <summary class:list={['nav-item', { active: isActive('/topics') }]}
-              >Domains <span>+</span></summary
+              >Topics <span>+</span></summary
             >
             <div class="mega-menu">
               <div class="mega-intro">
-                <p class="micro-label">Materials atlas</p>
-                <h2>Connected disciplines.<br />One engineering framework.</h2>
+                <p class="micro-label">Materials topics</p>
+                <h2>One field.<br />Many connected scales.</h2>
                 <p>Explore materials from electronic structure to manufacturing and deployment.</p>
-                <a href="/topics">View all 12 domains <span>↗</span></a>
+                <a href="/topics">View all 12 topics <span>↗</span></a>
               </div>
               <div class="mega-grid">
                 {
@@ -101,7 +111,7 @@ const jsonLd = [
                   ))
                 }
                 <a class="mega-all" href="/topics">
-                  <span>12</span><strong>All domains</strong><small
+                  <span>12</span><strong>All topics</strong><small
                     >Complete materials landscape</small
                   >
                 </a>
@@ -145,7 +155,12 @@ const jsonLd = [
     <footer class="site-footer">
       <div class="shell footer-primary">
         <div class="footer-brand">
-          <img src="/brand/bn-material-logo.svg" alt="BN Material" />
+          <a class="brand footer-wordmark" href="/" aria-label="BN Material home">
+            <span class="brand-mark" aria-hidden="true">BN<i></i></span>
+            <span class="brand-name"
+              ><strong>BN Material</strong><small>Science in motion.</small></span
+            >
+          </a>
           <p>
             A broad materials-engineering platform connecting scientific research, computation,
             characterization, data systems, and purpose-built software.
@@ -237,21 +252,17 @@ const jsonLd = [
         revealItems.forEach((item) => item.classList.add('is-visible'));
       }
 
+      const header = document.querySelector('.site-header');
+      const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY > 20);
+      updateHeader();
+      window.addEventListener('scroll', updateHeader, { passive: true });
+
       if (matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
-        document.querySelectorAll('[data-tilt]').forEach((card) => {
-          card.addEventListener('pointermove', (event) => {
-            const rect = card.getBoundingClientRect();
-            const x = (event.clientX - rect.left) / rect.width - 0.5;
-            const y = (event.clientY - rect.top) / rect.height - 0.5;
-            card.style.setProperty('--tilt-x', `${y * -3.2}deg`);
-            card.style.setProperty('--tilt-y', `${x * 3.2}deg`);
-            card.style.setProperty('--glow-x', `${(x + 0.5) * 100}%`);
-            card.style.setProperty('--glow-y', `${(y + 0.5) * 100}%`);
-          });
-          card.addEventListener('pointerleave', () => {
-            card.style.setProperty('--tilt-x', '0deg');
-            card.style.setProperty('--tilt-y', '0deg');
-          });
+        const spectrum = document.querySelector('.hero-spectrum');
+        spectrum?.addEventListener('pointermove', (event) => {
+          const rect = spectrum.getBoundingClientRect();
+          spectrum.style.setProperty('--pointer-x', `${event.clientX - rect.left}px`);
+          spectrum.style.setProperty('--pointer-y', `${event.clientY - rect.top}px`);
         });
       }
     </script>

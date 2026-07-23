@@ -4,8 +4,8 @@
   "description": "Materials engineering across scales.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#07131b",
-  "theme_color": "#07131b",
+  "background_color": "#07020f",
+  "theme_color": "#05020d",
   "icons": [
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
   ]

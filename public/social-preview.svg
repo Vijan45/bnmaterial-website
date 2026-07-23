@@ -1,23 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">BN Material</title>
+  <desc id="desc">Materials engineered for what comes next.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07131b"/><stop offset="1" stop-color="#0c2530"/></linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#81e2ff"/><stop offset=".55" stop-color="#43b8ef"/><stop offset="1" stop-color="#9c8dff"/></linearGradient>
-    <pattern id="grid" width="72" height="72" patternUnits="userSpaceOnUse"><path d="M72 0H0V72" fill="none" stroke="#9dd8e5" stroke-opacity=".08"/></pattern>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#030107"/>
+      <stop offset=".52" stop-color="#07020f"/>
+      <stop offset="1" stop-color="#1a0628"/>
+    </linearGradient>
+    <linearGradient id="spectrum" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#00efff"/>
+      <stop offset=".53" stop-color="#8d7cff"/>
+      <stop offset="1" stop-color="#ff4fd8"/>
+    </linearGradient>
+    <radialGradient id="core">
+      <stop stop-color="#fff"/>
+      <stop offset=".2" stop-color="#00efff"/>
+      <stop offset="1" stop-color="#8d7cff" stop-opacity="0"/>
+    </radialGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#grid)"/>
-  <g transform="translate(76 76)">
-    <path d="M78 0 146 39v78l-68 39-68-39V39Z" fill="#07131b" stroke="url(#accent)" stroke-width="3"/>
-    <path d="M36 43h40c20 0 31 9 31 23 0 10-6 17-15 20 12 3 19 11 19 23 0 17-13 26-36 26H36Zm37 34c9 0 14-3 14-10s-5-10-14-10H55v20Zm3 42c10 0 15-4 15-11s-5-11-15-11H55v22Z" fill="#a9efff"/>
-    <path d="M91 39h18l27 58V39h18v96h-18l-27-60v60H91Z" fill="#55bff2" transform="translate(-20)"/>
-    <g fill="#9c8dff"><circle cx="78" cy="0" r="5"/><circle cx="146" cy="39" r="5"/><circle cx="146" cy="117" r="5"/><circle cx="78" cy="156" r="5"/><circle cx="10" cy="117" r="5"/><circle cx="10" cy="39" r="5"/></g>
+  <g fill="none" stroke="url(#spectrum)" stroke-linecap="round">
+    <path d="M520 472C675 112 791 566 940 256s188 76 293 164" stroke-width="5"/>
+    <path d="M486 369c181 184 278-231 446 57s216-187 338-238" stroke-width="2.5" opacity=".55"/>
+    <path d="M550 548c184-145 270-395 411-263s151 256 286-174" stroke-width="1.5" opacity=".32"/>
   </g>
-  <text x="76" y="325" fill="#f4fbfb" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="700" letter-spacing="-4">BN MATERIAL</text>
-  <text x="79" y="385" fill="#81e2ff" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" letter-spacing="5">ENGINEERING MATTER ACROSS SCALES</text>
-  <text x="79" y="462" fill="#8ea5ac" font-family="Arial, Helvetica, sans-serif" font-size="24">Crystal engineering · Molecular dynamics · Semiconductors · Solar cells</text>
-  <text x="79" y="502" fill="#8ea5ac" font-family="Arial, Helvetica, sans-serif" font-size="24">Biomaterials · Ceramics · Polymers · Nanomaterials · Scientific software</text>
-  <g transform="translate(920 90)" fill="none" stroke="#81e2ff" stroke-opacity=".35">
-    <path d="m0 80 70-40 70 40v80l-70 40-70-40Z"/><path d="m70 40 70-40 70 40v80l-70 40"/><path d="m0 160 70 40v80l70 40 70-40v-80l-70-40"/>
-    <circle cx="70" cy="40" r="8" fill="#81e2ff"/><circle cx="140" cy="160" r="8" fill="#9c8dff"/><circle cx="70" cy="280" r="8" fill="#43b8ef"/>
-  </g>
+  <circle cx="919" cy="329" r="118" fill="url(#core)"/>
+  <text x="80" y="210" fill="#00efff" font-family="Arial, Helvetica, sans-serif" font-size="68" font-weight="800" letter-spacing="-5">BN</text>
+  <circle cx="170" cy="150" r="7" fill="#ffd84d"/>
+  <text x="189" y="210" fill="#faf8ff" font-family="Arial, Helvetica, sans-serif" font-size="68" font-weight="800" letter-spacing="-2">MATERIAL</text>
+  <rect x="80" y="250" width="104" height="4" rx="2" fill="#ffd84d"/>
+  <text x="80" y="338" fill="#faf8ff" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700" letter-spacing="-1.5">Materials engineered</text>
+  <text x="80" y="398" fill="url(#spectrum)" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700" letter-spacing="-1.5">for what comes next.</text>
 </svg>

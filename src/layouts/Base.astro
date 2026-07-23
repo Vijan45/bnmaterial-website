@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/redesign.css';
 import { site, topics, products } from '../config/site';
 
 interface Props {
@@ -36,7 +37,7 @@ const jsonLd = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#05020d" />
+    <meta name="theme-color" content="#050412" />
     <meta name="color-scheme" content="dark light" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
@@ -69,6 +70,7 @@ const jsonLd = [
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <div class="scroll-progress" aria-hidden="true"></div>
     <div class="site-aurora" aria-hidden="true"></div>
     <header class="site-header">
       <div class="utility-bar">
@@ -79,9 +81,13 @@ const jsonLd = [
       </div>
       <nav class="shell main-nav" aria-label="Primary navigation">
         <a class="brand" href="/" aria-label="BN Material home">
-          <span class="brand-mark" aria-hidden="true">BN<i></i></span>
+          <span class="brand-mark" aria-hidden="true">
+            <i class="mark-b"></i>
+            <i class="mark-n"></i>
+            <i class="mark-fault"></i>
+          </span>
           <span class="brand-name"
-            ><strong>BN Material</strong><small>Science in motion.</small></span
+            ><strong><b>BN</b> Material</strong><small>Materials · models · meaning</small></span
           >
         </a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-panel">
@@ -156,9 +162,13 @@ const jsonLd = [
       <div class="shell footer-primary">
         <div class="footer-brand">
           <a class="brand footer-wordmark" href="/" aria-label="BN Material home">
-            <span class="brand-mark" aria-hidden="true">BN<i></i></span>
+            <span class="brand-mark" aria-hidden="true">
+              <i class="mark-b"></i>
+              <i class="mark-n"></i>
+              <i class="mark-fault"></i>
+            </span>
             <span class="brand-name"
-              ><strong>BN Material</strong><small>Science in motion.</small></span
+              ><strong><b>BN</b> Material</strong><small>Materials · models · meaning</small></span
             >
           </a>
           <p>
@@ -235,6 +245,9 @@ const jsonLd = [
       });
 
       const revealItems = document.querySelectorAll('[data-reveal]');
+      revealItems.forEach((item, index) => {
+        item.style.setProperty('--reveal-order', String(index % 5));
+      });
       if ('IntersectionObserver' in window) {
         const revealObserver = new IntersectionObserver(
           (entries) => {
@@ -253,7 +266,13 @@ const jsonLd = [
       }
 
       const header = document.querySelector('.site-header');
-      const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY > 20);
+      const progress = document.querySelector('.scroll-progress');
+      const updateHeader = () => {
+        header?.classList.toggle('scrolled', window.scrollY > 20);
+        const distance = document.documentElement.scrollHeight - innerHeight;
+        const ratio = distance > 0 ? Math.min(1, Math.max(0, scrollY / distance)) : 0;
+        progress?.style.setProperty('--scroll-progress', String(ratio));
+      };
       updateHeader();
       window.addEventListener('scroll', updateHeader, { passive: true });
 
@@ -263,6 +282,36 @@ const jsonLd = [
           const rect = spectrum.getBoundingClientRect();
           spectrum.style.setProperty('--pointer-x', `${event.clientX - rect.left}px`);
           spectrum.style.setProperty('--pointer-y', `${event.clientY - rect.top}px`);
+          spectrum.style.setProperty(
+            '--spectrum-tilt-x',
+            `${((event.clientY - rect.top) / rect.height - 0.5) * -2.5}deg`,
+          );
+          spectrum.style.setProperty(
+            '--spectrum-tilt-y',
+            `${((event.clientX - rect.left) / rect.width - 0.5) * 3}deg`,
+          );
+        });
+        spectrum?.addEventListener('pointerleave', () => {
+          spectrum.style.setProperty('--spectrum-tilt-x', '0deg');
+          spectrum.style.setProperty('--spectrum-tilt-y', '0deg');
+        });
+
+        document.querySelectorAll('[data-tilt]').forEach((card) => {
+          card.addEventListener('pointermove', (event) => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty(
+              '--card-tilt-x',
+              `${((event.clientY - rect.top) / rect.height - 0.5) * -2}deg`,
+            );
+            card.style.setProperty(
+              '--card-tilt-y',
+              `${((event.clientX - rect.left) / rect.width - 0.5) * 2.5}deg`,
+            );
+          });
+          card.addEventListener('pointerleave', () => {
+            card.style.setProperty('--card-tilt-x', '0deg');
+            card.style.setProperty('--card-tilt-y', '0deg');
+          });
         });
       }
     </script>

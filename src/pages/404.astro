@@ -2,14 +2,24 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="Page Not Found" description="The requested BN Material page could not be found."
-  ><section class="page-hero container">
-    <p class="eyebrow">Error 404</p><h1>This path has no stable structure.</h1><p class="lead">
-      Return to the BN Material homepage or explore the topic and software catalogues.
-    </p><div class="actions">
-      <a class="button" href="/">Return home</a><a class="button secondary" href="/topics"
-        >Explore topics</a
-      >
+<Base title="Page Not Found" description="The requested BN Material page could not be found.">
+  <section class="page-hero">
+    <div class="shell page-hero-inner">
+      <div class="page-hero-copy" data-reveal>
+        <p class="eyebrow">Error / 404</p>
+        <h1>This path has no stable material phase.</h1>
+        <p>
+          The requested page could not be resolved. Return to the homepage or explore the complete
+          materials atlas.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="/"><span>Return home</span><b>↗</b></a>
+          <a class="button button-outline" href="/topics"><span>Explore domains</span><b>→</b></a>
+        </div>
+      </div>
+      <aside class="page-hero-aside" data-reveal>
+        <span>System state</span><strong>404</strong><p>Unresolved route / no content record</p>
+      </aside>
     </div>
-  </section></Base
->
+  </section>
+</Base>

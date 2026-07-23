@@ -1,1 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630"><defs><radialGradient id="g"><stop stop-color="#163c63"/><stop offset="1" stop-color="#050913"/></radialGradient><pattern id="p" width="70" height="60" patternUnits="userSpaceOnUse"><circle cx="35" cy="30" r="3" fill="#43d9ff" opacity=".5"/></pattern></defs><rect width="1200" height="630" fill="url(#g)"/><rect width="1200" height="630" fill="url(#p)"/><path fill="none" stroke="#43d9ff" stroke-width="8" d="M90 120h150l55 135-55 135H90L35 255z"/><text x="80" y="290" fill="#43d9ff" font-size="100" font-weight="700" font-family="Arial">BN</text><text x="360" y="235" fill="#f2f7ff" font-size="84" font-weight="700" font-family="Arial">BN Material</text><text x="365" y="305" fill="#9cafc8" font-size="30" font-family="Arial">Materials science for a better-engineered future.</text><text x="365" y="385" fill="#43d9ff" font-size="25" font-family="monospace">STRUCTURE → PROCESSING → PROPERTIES → PERFORMANCE</text><text x="365" y="455" fill="#f2f7ff" font-size="24" font-family="Arial">Science. Innovation. Impact.</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07131b"/><stop offset="1" stop-color="#0c2530"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#81e2ff"/><stop offset=".55" stop-color="#43b8ef"/><stop offset="1" stop-color="#9c8dff"/></linearGradient>
+    <pattern id="grid" width="72" height="72" patternUnits="userSpaceOnUse"><path d="M72 0H0V72" fill="none" stroke="#9dd8e5" stroke-opacity=".08"/></pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <g transform="translate(76 76)">
+    <path d="M78 0 146 39v78l-68 39-68-39V39Z" fill="#07131b" stroke="url(#accent)" stroke-width="3"/>
+    <path d="M36 43h40c20 0 31 9 31 23 0 10-6 17-15 20 12 3 19 11 19 23 0 17-13 26-36 26H36Zm37 34c9 0 14-3 14-10s-5-10-14-10H55v20Zm3 42c10 0 15-4 15-11s-5-11-15-11H55v22Z" fill="#a9efff"/>
+    <path d="M91 39h18l27 58V39h18v96h-18l-27-60v60H91Z" fill="#55bff2" transform="translate(-20)"/>
+    <g fill="#9c8dff"><circle cx="78" cy="0" r="5"/><circle cx="146" cy="39" r="5"/><circle cx="146" cy="117" r="5"/><circle cx="78" cy="156" r="5"/><circle cx="10" cy="117" r="5"/><circle cx="10" cy="39" r="5"/></g>
+  </g>
+  <text x="76" y="325" fill="#f4fbfb" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="700" letter-spacing="-4">BN MATERIAL</text>
+  <text x="79" y="385" fill="#81e2ff" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" letter-spacing="5">ENGINEERING MATTER ACROSS SCALES</text>
+  <text x="79" y="462" fill="#8ea5ac" font-family="Arial, Helvetica, sans-serif" font-size="24">Crystal engineering · Molecular dynamics · Semiconductors · Solar cells</text>
+  <text x="79" y="502" fill="#8ea5ac" font-family="Arial, Helvetica, sans-serif" font-size="24">Biomaterials · Ceramics · Polymers · Nanomaterials · Scientific software</text>
+  <g transform="translate(920 90)" fill="none" stroke="#81e2ff" stroke-opacity=".35">
+    <path d="m0 80 70-40 70 40v80l-70 40-70-40Z"/><path d="m70 40 70-40 70 40v80l-70 40"/><path d="m0 160 70 40v80l70 40 70-40v-80l-70-40"/>
+    <circle cx="70" cy="40" r="8" fill="#81e2ff"/><circle cx="140" cy="160" r="8" fill="#9c8dff"/><circle cx="70" cy="280" r="8" fill="#43b8ef"/>
+  </g>
+</svg>

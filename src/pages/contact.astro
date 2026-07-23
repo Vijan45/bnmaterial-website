@@ -5,70 +5,101 @@ import { site } from '../config/site';
 
 <Base
   title="Contact"
-  description="Contact BN Material about software access, research collaboration, consulting, training, support, or general inquiries."
-  ><section class="page-hero container">
-    <p class="eyebrow">Contact</p><h1>Start a focused scientific conversation.</h1><p class="lead">
-      The secure server endpoint is not yet configured and the public mailbox has not been
-      independently confirmed. The interface below prepares an inquiry, then uses your email client.
-    </p>
-  </section><section>
-    <div class="container grid">
-      <form class="card" id="contact-form">
-        <label for="name">Name</label><input
-          id="name"
-          name="name"
-          required
-          autocomplete="name"
-        /><label for="email">Email</label><input
-          id="email"
-          name="email"
-          type="email"
-          required
-          autocomplete="email"
-        /><label for="category">Inquiry category</label><select id="category" name="category"
-          ><option>Software access</option><option>Research collaboration</option><option
-            >Consulting</option
-          ><option>Training and academy</option><option>Technical support</option><option
-            >General inquiry</option
-          ></select
-        ><label for="message">Message</label><textarea id="message" name="message" required
-        ></textarea><div hidden>
-          <label for="website">Leave blank</label><input
-            id="website"
-            name="website"
-            tabindex="-1"
-            autocomplete="off"
-          />
-        </div><p class="muted">
-          By continuing, you choose to share these details by email for the purpose of receiving a
-          response.
-        </p><button class="button" type="submit">Prepare email</button><p
-          id="form-status"
-          role="status"
-        >
+  description="Contact BN Material about research collaboration, scientific software, materials characterization, computation, training, consulting, or technical inquiries."
+>
+  <section class="page-hero">
+    <div class="shell page-hero-inner">
+      <div class="page-hero-copy" data-reveal>
+        <p class="eyebrow">Contact BN Material</p>
+        <h1>Start a focused scientific conversation.</h1>
+        <p>
+          Describe the materials system, scientific question, data type, software need, or
+          collaboration objective. The form prepares an email in your local mail application.
         </p>
-      </form><aside class="card">
-        <h2>Email fallback</h2><p>
-          Once the Zoho mailbox or alias is confirmed, inquiries can be sent to <strong
-            >{site.contactEmail}</strong
-          >.
-        </p><p class="muted">
-          No password, SMTP credential, or visitor submission is stored by this website.
+      </div>
+      <aside class="page-hero-aside" data-reveal>
+        <span>Inquiry scope</span>
+        <strong>Research + software</strong>
+        <p>
+          Materials science, computation, characterization, data systems, training, and
+          scientific-software development.
         </p>
       </aside>
     </div>
-  </section><script define:vars={{ email: site.contactEmail }}>
-    document.querySelector('#contact-form')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const f = new FormData(e.currentTarget);
-      if (f.get('website')) return;
-      const subject = encodeURIComponent(`BN Material — ${f.get('category')}`);
+  </section>
+
+  <section class="page-section">
+    <div class="shell contact-layout">
+      <form class="contact-form" id="contact-form" data-reveal>
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input id="name" name="name" required autocomplete="name" />
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email" />
+        </div>
+        <div class="form-field full">
+          <label for="category">Inquiry category</label>
+          <select id="category" name="category">
+            <option>Research collaboration</option>
+            <option>Scientific software</option>
+            <option>Materials characterization</option>
+            <option>Computational materials science</option>
+            <option>Consulting or training</option>
+            <option>General inquiry</option>
+          </select>
+        </div>
+        <div class="form-field full">
+          <label for="message">Scientific or technical context</label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            placeholder="Describe the material system, objective, available data, constraints, and expected outcome."
+          ></textarea>
+        </div>
+        <div hidden>
+          <label for="website">Leave blank</label>
+          <input id="website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+        <p class="form-note full">
+          By continuing, you choose to share these details by email for the purpose of receiving a
+          response.
+        </p>
+        <button class="button button-primary" type="submit"
+          ><span>Prepare email</span><b>↗</b></button
+        >
+        <p id="form-status" role="status"></p>
+      </form>
+      <aside class="contact-aside" data-reveal>
+        <p class="micro-label">Direct contact</p>
+        <h2>Use a clear subject and sufficient context.</h2>
+        <p>
+          For research or software discussions, include the relevant data type, target material,
+          current workflow, platform, timeline, and any non-negotiable scientific requirements.
+        </p>
+        <p>No password, SMTP credential, or visitor submission is stored by this static website.</p>
+        <a class="contact-email" href={`mailto:${site.contactEmail}`}
+          ><span>{site.contactEmail}</span><b>↗</b></a
+        >
+      </aside>
+    </div>
+  </section>
+
+  <script define:vars={{ email: site.contactEmail }}>
+    document.querySelector('#contact-form')?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const form = new FormData(event.currentTarget);
+      if (form.get('website')) return;
+      const subject = encodeURIComponent(`BN Material — ${form.get('category')}`);
       const body = encodeURIComponent(
-        `Name: ${f.get('name')}\nEmail: ${f.get('email')}\n\n${f.get('message')}`,
+        `Name: ${form.get('name')}\nEmail: ${form.get('email')}\n\n${form.get('message')}`,
       );
-      document.querySelector('#form-status').textContent =
-        'Opening your email application. Please verify the recipient before sending.';
+      const status = document.querySelector('#form-status');
+      if (status)
+        status.textContent = 'Opening your email application. Verify the recipient before sending.';
       location.href = `mailto:${email}?subject=${subject}&body=${body}`;
     });
-  </script></Base
->
+  </script>
+</Base>

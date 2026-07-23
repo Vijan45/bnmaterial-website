@@ -2,6 +2,10 @@
 
 Production-oriented Astro website for BN Material: an independent materials-science, research, scientific-software, and engineering-knowledge platform.
 
+## 2026 root redesign
+
+The current interface is a complete materials-atlas redesign covering twelve MSE domains, six engineering scales, and three scientific-software environments. The visual system uses scientifically grounded conceptual animation rather than generic orbital decoration. See `docs/redesign-notes.md` for the domain architecture, brand assets, animation rationale, and validation notes.
+
 ## Stack and local setup
 
 Astro static output, TypeScript strict mode, custom CSS tokens, Vitest, Playwright, ESLint, Prettier, and Cloudflare Pages. Use Node 22 LTS and pnpm.

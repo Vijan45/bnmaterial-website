@@ -7,7 +7,7 @@ describe('content integrity', () => {
       'sem-auto-analysis-tool',
       'thermo-analyzer-studio',
     ]));
-  it('has six topic hubs', () => expect(topics).toHaveLength(6));
+  it('has twelve connected topic hubs', () => expect(topics).toHaveLength(12));
   it('uses the canonical host', () => expect(site.url).toBe('https://bnmaterial.com'));
   it('keeps the sister site external', () => expect(site.sisterSite).toBe('https://bhijan.com.np'));
 });

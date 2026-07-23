@@ -5,205 +5,54 @@ import { products } from '../../config/site';
 
 <Base
   title="Scientific Software"
-  description="Explore BN Material scientific software for spectroscopy, SEM image analysis, and thermal analysis."
+  description="Explore BN Material scientific software for spectroscopy, microscopy image analysis, and thermal analysis."
 >
-  <section class="page-hero shell">
-    <p class="eyebrow">Software catalogue / 03 environments</p><h1>
-      Scientific tools,<br />designed around <em>the data.</em>
-    </h1><p class="lead">
-      Focused environments for spectroscopy, microscopy, and thermal analysis. Every status reflects
-      the available evidence—never an invented release.
-    </p>
+  <section class="page-hero">
+    <div class="shell page-hero-inner">
+      <div class="page-hero-copy" data-reveal>
+        <p class="eyebrow">Scientific software / 03 systems</p>
+        <h1>Purpose-built tools for materials data.</h1>
+        <p>
+          Software environments designed around traceable laboratory workflows, meaningful controls,
+          reproducible analysis, and publication-grade scientific output.
+        </p>
+      </div>
+      <aside class="page-hero-aside" data-reveal>
+        <span>Software philosophy</span>
+        <strong>Data → insight</strong>
+        <p>
+          Analysis controls remain visible; conceptual graphics never masquerade as measured
+          results.
+        </p>
+      </aside>
+    </div>
   </section>
-  <section>
-    <div class="shell catalogue-list">
+
+  <section class="page-section">
+    <div class="shell catalogue-grid">
       {
-        products.map((p, i) => (
+        products.map((product, index) => (
           <a
-            class:list={['catalogue-item', `product-${p.accent}`]}
-            href={`/software/${p.slug}`}
+            class:list={['catalogue-row', `accent-${product.accent}`]}
+            href={`/software/${product.slug}`}
             data-reveal
           >
-            <>
-              <span>0{i + 1}</span>
-              <div>
-                <>
-                  <small>{p.category}</small>
-                  <h2>{p.name}</h2>
-                  <p>{p.summary}</p>
-                </>
-              </div>
-              <div class="catalogue-state">
-                <>
-                  <span class="status">
-                    <i />
-                    {p.status}
-                  </span>
-                  <b>↗</b>
-                </>
-              </div>
-              <div class:list={['catalogue-visual', `catalogue-visual-${i + 1}`]} />
-            </>
+            <span>0{index + 1}</span>
+            <div class="catalogue-copy">
+              <small>{product.category}</small>
+              <h2>{product.name}</h2>
+              <p>{product.summary}</p>
+            </div>
+            <div class="catalogue-status">
+              <>
+                <span>{product.status}</span>
+                <b>↗</b>
+              </>
+            </div>
+            <div class="catalogue-graphic" aria-hidden="true" />
           </a>
         ))
       }
     </div>
   </section>
 </Base>
-<style>
-  .page-hero h1 em {
-    color: var(--blue);
-    font-style: normal;
-  }
-  .catalogue-list {
-    border-top: 1px solid var(--line);
-  }
-  .catalogue-item {
-    min-height: 25rem;
-    display: grid;
-    grid-template-columns: 4rem 0.75fr 0.25fr 1fr;
-    gap: 2rem;
-    align-items: center;
-    position: relative;
-    border-bottom: 1px solid var(--line);
-    overflow: hidden;
-    transition:
-      padding 0.35s var(--ease),
-      background 0.3s;
-  }
-  .catalogue-item:hover {
-    padding-inline: 1.5rem;
-    background: #090e16;
-  }
-  .catalogue-item > span {
-    align-self: start;
-    margin-top: 2rem;
-    color: #4e5c6e;
-    font:
-      0.6rem IBM Plex Mono,
-      monospace;
-  }
-  .catalogue-item small {
-    color: var(--blue);
-    font:
-      0.55rem IBM Plex Mono,
-      monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  .catalogue-item h2 {
-    margin: 0.9rem 0;
-    font: 500 clamp(2rem, 3.5vw, 4rem)/0.95 Space Grotesk;
-    letter-spacing: -0.055em;
-  }
-  .catalogue-item p {
-    max-width: 28rem;
-    color: #788697;
-  }
-  .catalogue-state {
-    height: 70%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-left: 1px solid var(--line);
-    padding-left: 1.5rem;
-  }
-  .catalogue-state .status {
-    align-self: flex-start;
-  }
-  .catalogue-state > b {
-    color: var(--blue);
-    font-size: 1.3rem;
-  }
-  .catalogue-visual {
-    height: 70%;
-    position: relative;
-    border-left: 1px solid var(--line);
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 20% 25%;
-  }
-  .catalogue-visual::before {
-    content: '';
-    position: absolute;
-    inset: 12%;
-    background: var(--blue);
-    clip-path: polygon(
-      0 90%,
-      12% 86%,
-      18% 40%,
-      21% 88%,
-      40% 82%,
-      50% 8%,
-      54% 84%,
-      70% 76%,
-      81% 32%,
-      85% 81%,
-      100% 70%,
-      100% 100%,
-      0 100%
-    );
-    opacity: 0.5;
-  }
-  .catalogue-visual-2::before {
-    background: var(--green);
-    clip-path: polygon(
-      8% 12%,
-      22% 8%,
-      32% 26%,
-      47% 18%,
-      62% 35%,
-      78% 22%,
-      92% 38%,
-      86% 70%,
-      68% 84%,
-      52% 70%,
-      36% 88%,
-      15% 72%
-    );
-    opacity: 0.35;
-  }
-  .catalogue-visual-3::before {
-    background: var(--amber);
-    clip-path: polygon(
-      0 10%,
-      16% 18%,
-      30% 48%,
-      45% 67%,
-      60% 75%,
-      78% 80%,
-      100% 84%,
-      100% 100%,
-      0 100%
-    );
-  }
-  @media (max-width: 850px) {
-    .catalogue-item {
-      grid-template-columns: 2rem 1fr 0.3fr;
-      min-height: 22rem;
-    }
-    .catalogue-visual {
-      display: none;
-    }
-  }
-  @media (max-width: 560px) {
-    .catalogue-item {
-      grid-template-columns: 1fr;
-      padding-block: 2rem;
-      gap: 1rem;
-    }
-    .catalogue-item > span {
-      margin: 0;
-    }
-    .catalogue-state {
-      height: auto;
-      border: 0;
-      padding: 0;
-      flex-direction: row;
-    }
-    .catalogue-item:hover {
-      padding-inline: 0;
-    }
-  }
-</style>

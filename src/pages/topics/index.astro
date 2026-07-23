@@ -4,28 +4,49 @@ import { topics } from '../../config/site';
 ---
 
 <Base
-  title="Materials Science Topics"
-  description="Explore BN Material topic hubs across physical metallurgy, mechanics, defects, functional materials, processing, and computation."
-  ><section class="page-hero container">
-    <p class="eyebrow">Topic hubs</p><h1>Materials knowledge, organized by mechanism.</h1><p
-      class="lead"
-    >
-      Rigorous starting points for connecting material structure with processing, properties, and
-      performance.
-    </p>
-  </section><section>
-    <div class="container grid">
+  title="Materials Engineering Domains"
+  description="Explore twelve connected BN Material domains spanning crystal engineering, molecular dynamics, semiconductors, energy, biomaterials, ceramics, polymers, nanomaterials, metallurgy, catalysis, characterization, and manufacturing."
+>
+  <section class="page-hero">
+    <div class="shell page-hero-inner">
+      <div class="page-hero-copy" data-reveal>
+        <p class="eyebrow">Materials atlas / 12 domains</p>
+        <h1>The full materials-engineering landscape.</h1>
+        <p>
+          Organized around scientific mechanisms, material classes, analytical methods, and
+          engineering translation—from electronic structure to industrial systems.
+        </p>
+      </div>
+      <aside class="page-hero-aside" data-reveal>
+        <span>Domain architecture</span>
+        <strong>12 × 06</strong>
+        <p>Twelve materials domains connected across six engineering scales.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="shell topic-index-grid">
       {
-        topics.map((t) => (
-          <a class="card" href={`/topics/${t.slug}`}>
-            <>
-              <h3>{t.title}</h3>
-              <p>{t.summary}</p>
-              <span>Explore topic →</span>
-            </>
+        topics.map((topic, index) => (
+          <a
+            class:list={['topic-index-card', `accent-${topic.accent}`]}
+            href={`/topics/${topic.slug}`}
+            data-reveal
+            data-tilt
+          >
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <div class="mini-glyph" aria-hidden="true" />
+            <h3>{topic.title}</h3>
+            <p>{topic.summary}</p>
+            <div class="topic-methods">
+              {topic.methods.map((method) => (
+                <small>{method}</small>
+              ))}
+            </div>
           </a>
         ))
       }
     </div>
-  </section></Base
->
+  </section>
+</Base>

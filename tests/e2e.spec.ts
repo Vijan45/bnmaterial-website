@@ -8,7 +8,7 @@ test('homepage and mobile navigation', async ({ page }) => {
     .getByRole('button', { name: 'Menu' })
     .click();
   await expect(
-    page.locator('nav[aria-label="Primary"] summary').filter({ hasText: 'Software' }),
+    page.locator('nav[aria-label="Primary navigation"] summary').filter({ hasText: 'Software' }),
   ).toBeVisible();
   await page.keyboard.press('Escape');
 });

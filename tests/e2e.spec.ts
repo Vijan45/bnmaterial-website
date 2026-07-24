@@ -53,17 +53,17 @@ test('scientific visual system renders and animates without browser errors', asy
   await page.waitForTimeout(180);
 
   await expect(page.locator('canvas')).toHaveCount(4);
+  const heroArtwork = page.locator('.hero-artwork-image');
+  await expect(heroArtwork).toBeVisible();
+  expect(
+    await heroArtwork.evaluate((image: HTMLImageElement) => image.naturalWidth),
+  ).toBeGreaterThan(1000);
   const canvasesDrawn = await page.locator('canvas').evaluateAll((canvases) =>
     canvases.every((canvas) => {
       const canvasElement = canvas as HTMLCanvasElement;
       const context = canvasElement.getContext('2d');
       if (!context || canvasElement.width === 0 || canvasElement.height === 0) return false;
-      const pixels = context.getImageData(
-        0,
-        0,
-        Math.min(canvasElement.width, 120),
-        Math.min(canvasElement.height, 80),
-      ).data;
+      const pixels = context.getImageData(0, 0, canvasElement.width, canvasElement.height).data;
       for (let index = 3; index < pixels.length; index += 4) {
         if ((pixels[index] ?? 0) > 0) return true;
       }
@@ -72,7 +72,13 @@ test('scientific visual system renders and animates without browser errors', asy
   );
   expect(canvasesDrawn).toBe(true);
 
-  for (const selector of ['.hero-glow-a', '.spectrum-halo-wide', '.curve-a', '.spectrum-core']) {
+  for (const selector of [
+    '.hero-glow-a',
+    '.hero-artwork-image',
+    '.spectrum-halo-wide',
+    '.curve-a',
+    '.spectrum-core',
+  ]) {
     await expect(page.locator(selector)).not.toHaveCSS('animation-name', 'none');
   }
   expect(browserErrors).toEqual([]);

@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
 import { site, topics } from '../config/site';
 
 const pages = {
@@ -11,16 +12,18 @@ const pages = {
     headline: 'Mechanism-led research across materials classes and scales.',
     body: 'Research is organized around the relationships between composition, structure, processing, properties, and performance—not isolated instruments or fashionable labels.',
     metric: '12 domains',
-    metricCopy: 'Connected through a multiscale engineering framework.',
+    metricCopy: 'Connected through one multiscale engineering framework.',
+    icon: 'molecular',
   },
   publications: {
     title: 'Publications',
     description: 'Verified publications and research outputs from the BN Material ecosystem.',
     eyebrow: 'Research outputs',
     headline: 'Scientific records structured for traceability.',
-    body: 'Publication records will be presented with verified bibliographic information, persistent links, research domains, methods, and supporting data where authoritative source information is available.',
+    body: 'Publication records are presented only when authoritative bibliographic information, persistent links, research domains, methods, and supporting context can be verified.',
     metric: 'Evidence first',
-    metricCopy: 'No invented publication records, metrics, or affiliations.',
+    metricCopy: 'No invented records, metrics, affiliations, or citation claims.',
+    icon: 'database',
   },
   benchmarks: {
     title: 'Benchmarks',
@@ -31,6 +34,7 @@ const pages = {
     body: 'Benchmarks are designed to document datasets, software versions, computational environments, methods, metrics, uncertainty, and interpretation together.',
     metric: 'Reproducible',
     metricCopy: 'Every comparison should be inspectable and repeatable.',
+    icon: 'signal',
   },
   resources: {
     title: 'Resources',
@@ -41,6 +45,7 @@ const pages = {
     body: 'Guides and documentation connect scientific principles with analysis decisions, reproducibility, interpretation, and practical implementation.',
     metric: 'Across scales',
     metricCopy: 'From electronic structure to engineering deployment.',
+    icon: 'layers',
   },
   academy: {
     title: 'Academy',
@@ -50,6 +55,7 @@ const pages = {
     body: 'Future learning pathways can support graduate students, laboratories, universities, and research teams across characterization, computation, materials design, data interpretation, and software practice.',
     metric: 'Method-led',
     metricCopy: 'Training focused on reasoning rather than button sequences.',
+    icon: 'crystal',
   },
   consulting: {
     title: 'Consulting',
@@ -57,20 +63,22 @@ const pages = {
       'Independent materials-science, modeling, characterization, and scientific-software consulting.',
     eyebrow: 'Scientific consulting',
     headline: 'Technical depth for consequential materials decisions.',
-    body: 'Potential engagements include research planning, materials characterization strategy, computational workflows, analysis-system design, scientific visualization, training, and reproducibility.',
+    body: 'Potential engagements include research planning, characterization strategy, computational workflows, analysis-system design, scientific visualization, training, and reproducibility.',
     metric: 'Defined scope',
-    metricCopy: 'Institutional boundaries and evidence requirements clarified first.',
+    metricCopy: 'Evidence requirements, boundaries, and expected outcomes are clarified first.',
+    icon: 'process',
   },
   about: {
     title: 'About',
     description:
       'About BN Material, its independent scientific mission, founder, and sister-site ecosystem.',
     eyebrow: 'About BN Material',
-    headline: 'An independent platform for materials engineering and scientific software.',
-    body: `BN Material is developed by ${site.founder}, affiliated with ${site.affiliation}. It is an independent platform and not an official NAST website; the affiliation does not imply institutional endorsement.`,
+    headline: 'An independent platform for materials intelligence and scientific software.',
+    body: `BN Material is developed by ${site.founder}, affiliated with the ${site.affiliation}. It operates as an independent research and software platform; professional affiliation does not imply institutional endorsement.`,
     metric: 'Independent',
     metricCopy:
-      'Research identity, software work, and institutional affiliation remain clearly separated.',
+      'Research identity, software work, and professional affiliation remain clearly separated.',
+    icon: 'shield',
   },
   'privacy-policy': {
     title: 'Privacy Policy',
@@ -80,6 +88,7 @@ const pages = {
     body: 'This static website is designed to minimize personal-data collection. Information voluntarily sent by email is used only to respond to the inquiry unless a different purpose is explicitly agreed.',
     metric: 'Minimal data',
     metricCopy: 'No advertising profile is created by the website.',
+    icon: 'shield',
   },
   'terms-of-use': {
     title: 'Terms of Use',
@@ -89,20 +98,22 @@ const pages = {
     body: 'Website materials are provided for general scientific and educational purposes. They do not replace project-specific engineering, safety, regulatory, legal, or commercial advice.',
     metric: 'Informational',
     metricCopy: 'Software access and licensing require separate written terms.',
+    icon: 'layers',
   },
   disclaimer: {
     title: 'Disclaimer',
     description: 'Scientific, institutional, and software disclaimers for BN Material.',
     eyebrow: 'Legal / disclaimer',
     headline: 'Clear boundaries between evidence, interpretation, and concept.',
-    body: 'Conceptual website graphics are not experimental results. Product illustrations do not establish implemented functionality. Institutional affiliation identifies professional context and does not imply endorsement.',
+    body: 'Conceptual website graphics are not experimental results. Product illustrations do not establish implemented functionality. Professional affiliation identifies context and does not imply endorsement.',
     metric: 'Transparent',
     metricCopy: 'Scientific claims expand only when evidence is available.',
+    icon: 'signal',
   },
 };
 
 export function getStaticPaths() {
-  return [
+  const slugs = [
     'research',
     'publications',
     'benchmarks',
@@ -113,108 +124,162 @@ export function getStaticPaths() {
     'privacy-policy',
     'terms-of-use',
     'disclaimer',
-  ].map((slug) => ({ params: { slug }, props: { slug } }));
+  ];
+  return slugs.map((slug) => ({ params: { slug }, props: { slug } }));
 }
 
 const { slug } = Astro.props;
 const page = pages[slug as keyof typeof pages];
-const principles = [
+const principles: Array<[string, string, string]> = [
   [
     'Mechanism before description',
     'Connect observations to defensible physical, chemical, biological, or computational mechanisms.',
+    'molecular',
   ],
   [
     'Scale-aware interpretation',
     'Keep electronic, atomic, nano, microstructural, component, and system scales connected.',
+    'layers',
   ],
   [
     'Traceable evidence',
     'Separate measured data, calculated results, literature context, assumptions, and conceptual illustration.',
+    'shield',
   ],
 ];
 ---
 
 <Base title={page.title} description={page.description}>
-  <section class="page-hero">
-    <div class="shell page-hero-inner">
-      <div class="page-hero-copy" data-reveal>
-        <p class="eyebrow">{page.eyebrow}</p>
+  <section class="inner-hero generic-hero">
+    <div class="shell inner-hero-grid">
+      <div class="inner-hero-copy" data-reveal>
+        <span class="kicker">{page.eyebrow}</span>
         <h1>{page.headline}</h1>
         <p>{page.body}</p>
+        <div class="hero-actions">
+          <a
+            class="button button-accent"
+            href={slug === 'research' ? '#research-domains' : '/contact'}
+            ><span>{slug === 'research' ? 'Explore research domains' : 'Start a conversation'}</span
+            ><Icon name={slug === 'research' ? 'arrow-down' : 'arrow-up-right'} size={17} /></a
+          ><a class="button button-ghost" href="/topics"
+            ><span>Materials atlas</span><Icon name="arrow-right" size={17} /></a
+          >
+        </div>
       </div>
-      <aside class="page-hero-aside" data-reveal>
-        <span>BN Material / {page.title}</span>
-        <strong>{page.metric}</strong>
-        <p>{page.metricCopy}</p>
-      </aside>
+      <div class="generic-hero-visual" data-reveal>
+        <div class="generic-symbol"><Icon name={page.icon} size={78} strokeWidth={1.2} /></div>
+        <div class="generic-lines"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="generic-metric">
+          <span>BN Material / {page.title}</span><strong>{page.metric}</strong><p>
+            {page.metricCopy}
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
   {
     slug === 'research' ? (
-      <section class="page-section">
-        <div class="shell page-section-heading" data-reveal>
-          <div>
-            <>
-              <p class="micro-label">Research domains</p>
-              <h2>A complete materials landscape.</h2>
-            </>
-          </div>
-          <p>
-            Each domain is linked through shared questions about synthesis, structure, mechanism,
-            characterization, computation, performance, and translation.
-          </p>
+      <section class="section compact-top" id="research-domains">
+        <div class="shell section-heading" data-reveal>
+          <>
+            <div>
+              <>
+                <span class="kicker">Research domains</span>
+                <h2>A complete materials landscape.</h2>
+              </>
+            </div>
+            <p>
+              Each domain is linked through shared questions about synthesis, structure, mechanism,
+              characterization, computation, performance, and translation.
+            </p>
+          </>
         </div>
-        <div class="shell topic-index-grid">
+        <div class="shell research-domain-list">
           {topics.map((topic, index) => (
             <a
-              class:list={['topic-index-card', `accent-${topic.accent}`]}
+              class:list={['research-domain-row', `accent-${topic.accent}`]}
               href={`/topics/${topic.slug}`}
               data-reveal
+              data-spotlight
             >
               <span>{String(index + 1).padStart(2, '0')}</span>
-              <div class="mini-glyph" aria-hidden="true" />
-              <h3>{topic.title}</h3>
-              <p>{topic.summary}</p>
-              <div class="topic-methods">
-                {topic.methods.slice(0, 3).map((method) => (
+              <div class="row-icon">
+                <Icon name={topic.visual} size={24} />
+              </div>
+              <div>
+                <h3>{topic.title}</h3>
+                <p>{topic.summary}</p>
+              </div>
+              <div class="row-methods">
+                {topic.methods.slice(0, 2).map((method) => (
                   <small>{method}</small>
                 ))}
               </div>
+              <Icon name="arrow-up-right" size={18} />
             </a>
           ))}
         </div>
       </section>
     ) : (
-      <section class="page-section">
-        <div class="shell page-section-heading" data-reveal>
-          <div>
-            <>
-              <p class="micro-label">Operating principles</p>
-              <h2>Scientific clarity by design.</h2>
-            </>
-          </div>
-          <p>
-            Every BN Material section is structured to keep claims conservative, methods visible,
-            and the relationship between evidence and interpretation explicit.
-          </p>
+      <section class="section compact-top">
+        <div class="shell section-heading" data-reveal>
+          <>
+            <div>
+              <>
+                <span class="kicker">Operating principles</span>
+                <h2>Scientific clarity by design.</h2>
+              </>
+            </div>
+            <p>
+              Each section keeps claims conservative, methods visible, and the relationship between
+              evidence and interpretation explicit.
+            </p>
+          </>
         </div>
         <div class="shell info-grid">
-          {principles.map(([title, copy], index) => (
-            <article class="info-card" data-reveal>
-              <span>{String(index + 1).padStart(2, '0')}</span>
+          {principles.map(([title, copy, icon], index) => (
+            <article class="info-card" data-reveal data-spotlight>
+              <div class="info-card-top">
+                <span>0{index + 1}</span>
+                <Icon name={icon} size={26} />
+              </div>
               <h3>{title}</h3>
               <p>{copy}</p>
               {slug === 'about' && index === 2 ? (
-                <a href={site.sisterSite} target="_blank" rel="noopener noreferrer">
-                  Visit bhijan.com.np ↗
+                <a
+                  class="inline-link"
+                  href={site.sisterSite}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visit sister site <Icon name="external" size={15} />
                 </a>
               ) : (
-                <a href="/contact">Discuss an application ↗</a>
+                <a class="inline-link" href="/contact">
+                  Discuss an application <Icon name="arrow-up-right" size={15} />
+                </a>
               )}
             </article>
           ))}
         </div>
+        {(slug === 'publications' ||
+          slug === 'benchmarks' ||
+          slug === 'resources' ||
+          slug === 'academy') && (
+          <div class="shell readiness-panel" data-reveal>
+            <div>
+              <span class="kicker">Publishing discipline</span>
+              <h2>Records are released only when the underlying source is ready.</h2>
+            </div>
+            <p>
+              This page intentionally avoids placeholder publications, invented metrics, unsupported
+              downloads, or artificial activity. Verified material will appear with its provenance
+              and scope.
+            </p>
+          </div>
+        )}
       </section>
     )
   }

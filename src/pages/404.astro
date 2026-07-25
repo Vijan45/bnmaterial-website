@@ -1,25 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
 ---
 
 <Base title="Page Not Found" description="The requested BN Material page could not be found.">
-  <section class="page-hero">
-    <div class="shell page-hero-inner">
-      <div class="page-hero-copy" data-reveal>
-        <p class="eyebrow">Error / 404</p>
-        <h1>This path has no stable material phase.</h1>
-        <p>
-          The requested page could not be resolved. Return to the homepage or explore the complete
+  <section class="not-found">
+    <div class="shell not-found-grid">
+      <div class="not-found-copy" data-reveal>
+        <span class="kicker">Error / 404</span><h1>This path has no stable material phase.</h1><p>
+          The requested route could not be resolved. Return to the home page or explore the complete
           materials atlas.
-        </p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="/"><span>Return home</span><b>↗</b></a>
-          <a class="button button-outline" href="/topics"><span>Explore domains</span><b>→</b></a>
+        </p><div class="hero-actions">
+          <a class="button button-accent" href="/"
+            ><span>Return home</span><Icon name="arrow-up-right" size={17} /></a
+          ><a class="button button-ghost" href="/topics"
+            ><span>Explore domains</span><Icon name="arrow-right" size={17} /></a
+          >
         </div>
       </div>
-      <aside class="page-hero-aside" data-reveal>
-        <span>System state</span><strong>404</strong><p>Unresolved route / no content record</p>
-      </aside>
+      <div class="not-found-visual" data-reveal>
+        <span class="four">4</span><div class="zero"><i></i><i></i><span></span></div><span
+          class="four">4</span
+        ><small>Unresolved route / no content record</small>
+      </div>
     </div>
   </section>
 </Base>

@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import ProductVisual from '../../components/ProductVisual.astro';
 import { products } from '../../config/site';
 ---
 
@@ -7,50 +9,88 @@ import { products } from '../../config/site';
   title="Scientific Software"
   description="Explore BN Material scientific software for spectroscopy, microscopy image analysis, and thermal analysis."
 >
-  <section class="page-hero">
-    <div class="shell page-hero-inner">
-      <div class="page-hero-copy" data-reveal>
-        <p class="eyebrow">Scientific software / 03 systems</p>
-        <h1>Purpose-built tools for materials data.</h1>
+  <section class="inner-hero software-hero">
+    <div class="shell inner-hero-grid">
+      <div class="inner-hero-copy" data-reveal>
+        <span class="kicker">Scientific software / 03 environments</span>
+        <h1>Purpose-built systems for materials data.</h1>
         <p>
-          Software environments designed around traceable laboratory workflows, meaningful controls,
-          reproducible analysis, and publication-grade scientific output.
+          Interfaces designed around traceable laboratory workflows, meaningful scientific controls,
+          reproducible analysis, manual correction, and publication-ready output.
         </p>
+        <div class="hero-actions">
+          <a class="button button-accent" href="#catalogue"
+            ><span>Explore the catalogue</span><Icon name="arrow-down" size={17} /></a
+          ><a class="button button-ghost" href="/contact"
+            ><span>Discuss a workflow</span><Icon name="arrow-up-right" size={17} /></a
+          >
+        </div>
       </div>
-      <aside class="page-hero-aside" data-reveal>
-        <span>Software philosophy</span>
-        <strong>Data → insight</strong>
-        <p>
-          Analysis controls remain visible; conceptual graphics never masquerade as measured
-          results.
-        </p>
-      </aside>
+      <div class="software-stack-visual" data-reveal>
+        {
+          products.map((product, index) => (
+            <div class:list={['stack-window', `window-${index + 1}`, `accent-${product.accent}`]}>
+              <div>
+                <>
+                  <span />
+                  <span />
+                  <span />
+                  <small>0{index + 1}</small>
+                </>
+              </div>
+              <Icon name={product.visual} size={31} />
+              <strong>{product.name}</strong>
+              <small>{product.category}</small>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </section>
 
-  <section class="page-section">
-    <div class="shell catalogue-grid">
+  <section class="section compact-top" id="catalogue">
+    <div class="shell section-heading" data-reveal>
+      <div>
+        <span class="kicker">Software catalogue</span><h2>
+          Three focused environments. One transparent design philosophy.
+        </h2>
+      </div>
+      <p>
+        Current capability, development status, planned extensions, and access boundaries remain
+        explicit throughout the catalogue.
+      </p>
+    </div>
+    <div class="shell catalogue-list">
       {
         products.map((product, index) => (
-          <a
-            class:list={['catalogue-row', `accent-${product.accent}`]}
-            href={`/software/${product.slug}`}
-            data-reveal
-          >
-            <span>0{index + 1}</span>
+          <article class:list={['catalogue-item', `accent-${product.accent}`]} data-reveal>
             <div class="catalogue-copy">
-              <small>{product.category}</small>
+              <div class="software-meta">
+                <>
+                  <span>0{index + 1}</span>
+                  <small>{product.status}</small>
+                </>
+              </div>
+              <span class="kicker">{product.category}</span>
               <h2>{product.name}</h2>
               <p>{product.summary}</p>
+              <div class="catalogue-features">
+                {product.features.map((feature) => (
+                  <span>
+                    <Icon name="check" size={15} />
+                    {feature}
+                  </span>
+                ))}
+              </div>
+              <a class="button button-dark" href={`/software/${product.slug}`}>
+                <>
+                  <span>Open product profile</span>
+                  <Icon name="arrow-up-right" size={17} />
+                </>
+              </a>
             </div>
-            <div class="catalogue-status">
-              <>
-                <span>{product.status}</span>
-                <b>↗</b>
-              </>
-            </div>
-            <div class="catalogue-graphic" aria-hidden="true" />
-          </a>
+            <ProductVisual visual={product.visual} name={product.name} compact />
+          </article>
         ))
       }
     </div>

@@ -1,0 +1,341 @@
+---
+interface Props {
+  name: string;
+  size?: number;
+  strokeWidth?: number;
+  class?: string;
+}
+
+const { name, size = 24, strokeWidth = 1.7, class: className = '' } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width={strokeWidth}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  class={className}
+>
+  {
+    name === 'arrow-up-right' && (
+      <>
+        <>
+          <path d="M7 17 17 7" />
+          <path d="M8 7h9v9" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'arrow-right' && (
+      <>
+        <>
+          <path d="M5 12h14" />
+          <path d="m14 7 5 5-5 5" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'arrow-down' && (
+      <>
+        <>
+          <path d="M12 4v16" />
+          <path d="m7 15 5 5 5-5" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'menu' && (
+      <>
+        <>
+          <path d="M4 7h16" />
+          <path d="M4 12h16" />
+          <path d="M4 17h16" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'close' && (
+      <>
+        <>
+          <path d="m6 6 12 12" />
+          <path d="m18 6-12 12" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'sun' && (
+      <>
+        <>
+          <circle cx="12" cy="12" r="3.5" />
+          <path d="M12 2v2" />
+          <path d="M12 20v2" />
+          <path d="m4.93 4.93 1.42 1.42" />
+          <path d="m17.66 17.66 1.41 1.41" />
+          <path d="M2 12h2" />
+          <path d="M20 12h2" />
+          <path d="m6.34 17.66-1.41 1.41" />
+          <path d="m19.07 4.93-1.41 1.42" />
+        </>
+      </>
+    )
+  }
+  {name === 'moon' && <path d="M20 15.2A8.5 8.5 0 0 1 8.8 4 8.5 8.5 0 1 0 20 15.2Z" />}
+  {
+    name === 'crystal' && (
+      <>
+        <>
+          <path d="m12 2 7 5-2.6 9.2L12 22l-4.4-5.8L5 7l7-5Z" />
+          <path d="m5 7 7 4 7-4" />
+          <path d="m12 11-4.4 5.2" />
+          <path d="m12 11 4.4 5.2" />
+          <path d="M12 2v9" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'molecular' && (
+      <>
+        <>
+          <circle cx="6" cy="7" r="2.2" />
+          <circle cx="18" cy="6" r="2.2" />
+          <circle cx="15" cy="18" r="2.2" />
+          <circle cx="5" cy="17" r="1.7" />
+          <path d="m8.1 6.8 7.7-.6" />
+          <path d="m16.8 8  -1.1 7.8" />
+          <path d="m12.9 17.8-6.2-.6" />
+          <path d="m6.4 9.1-1 6.2" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'junction' && (
+      <>
+        <>
+          <path d="M3 5h7v14H3z" />
+          <path d="M14 5h7v14h-7z" />
+          <path d="M10 8h4" />
+          <path d="M10 12h4" />
+          <path d="M10 16h4" />
+          <path d="m5.5 9 2-2" />
+          <path d="m16.5 17 2-2" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'solar' && (
+      <>
+        <>
+          <circle cx="6" cy="6" r="2.5" />
+          <path d="M6 1v1" />
+          <path d="M6 10v1" />
+          <path d="M1 6h1" />
+          <path d="M10 6h1" />
+          <path d="m2.5 2.5.8.8" />
+          <path d="m8.7 8.7.8.8" />
+          <path d="m9.5 2.5-.8.8" />
+          <path d="m3.3 8.7-.8.8" />
+          <path d="m11 13 9-3-3 11-2.3-5.7L11 13Z" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'bio' && (
+      <>
+        <>
+          <path d="M12 21c4-4.1 7-7.1 7-11a4 4 0 0 0-7-2.6A4 4 0 0 0 5 10c0 3.9 3 6.9 7 11Z" />
+          <path d="M8.3 13h2l1-3 1.6 6 1.1-3h1.7" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'ceramic' && (
+      <>
+        <>
+          <path d="M4 4h16l-2 7H6L4 4Z" />
+          <path d="m6 11 2 9h8l2-9" />
+          <path d="M8 7h8" />
+          <path d="M9 15h6" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'polymer' && (
+      <>
+        <>
+          <path d="M3 12c2.2-5.4 5.1-5.4 7.3 0s5.1 5.4 7.3 0S20 6.6 21 9" />
+          <circle cx="3" cy="12" r="1" />
+          <circle cx="10.3" cy="12" r="1" />
+          <circle cx="17.6" cy="12" r="1" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'nano' && (
+      <>
+        <>
+          <path d="m12 2 8 4.5v9L12 20l-8-4.5v-9L12 2Z" />
+          <path d="m4 6.5 8 4.5 8-4.5" />
+          <path d="M12 11v9" />
+          <circle cx="12" cy="11" r="2.2" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'grain' && (
+      <>
+        <>
+          <path d="M3 4h6l3 4-2 5-5 1-2-4V4Z" />
+          <path d="m9 4 5-2 5 3 2 5-4 4-7-1" />
+          <path d="m5 14 5-1 4 3-1 6H7l-2-8Z" />
+          <path d="m14 16 3-2 4 2-1 6h-7" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'catalysis' && (
+      <>
+        <>
+          <path d="M6 3v6l-3 7a3.5 3.5 0 0 0 3.2 5h11.6a3.5 3.5 0 0 0 3.2-5l-3-7V3" />
+          <path d="M5 15h14" />
+          <path d="M9 3h6" />
+          <circle cx="9" cy="17.5" r=".8" />
+          <circle cx="14" cy="18.5" r="1" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'signal' && (
+      <>
+        <>
+          <path d="M3 18V6" />
+          <path d="M7 18v-4" />
+          <path d="M11 18V9" />
+          <path d="M15 18V4" />
+          <path d="M19 18v-7" />
+          <path d="M2 18h20" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'process' && (
+      <>
+        <>
+          <rect x="3" y="4" width="7" height="7" rx="1" />
+          <rect x="14" y="13" width="7" height="7" rx="1" />
+          <path d="M10 7.5h4a3 3 0 0 1 3 3V13" />
+          <path d="m14 10 3 3 3-3" />
+          <path d="M14 16.5h-4a3 3 0 0 1-3-3V11" />
+          <path d="m10 14-3-3-3 3" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'spectra' && (
+      <>
+        <>
+          <path d="M3 18h18" />
+          <path d="M4 16c2-1 2.6-9 4.3-9s2.2 8 3.8 8 2.1-12 3.8-12 1.9 11 4.1 12" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'micrograph' && (
+      <>
+        <>
+          <circle cx="7" cy="7" r="3" />
+          <circle cx="16.5" cy="6.5" r="2" />
+          <circle cx="15" cy="16" r="4" />
+          <circle cx="5.5" cy="17" r="1.5" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'thermal' && (
+      <>
+        <>
+          <path d="M9 4a3 3 0 0 1 6 0v9.2a5 5 0 1 1-6 0V4Z" />
+          <path d="M12 7v9" />
+          <circle cx="12" cy="17" r="1.8" />
+        </>
+      </>
+    )
+  }
+  {name === 'check' && <path d="m5 12 4 4L19 6" />}
+  {
+    name === 'layers' && (
+      <>
+        <>
+          <path d="m12 2 9 5-9 5-9-5 9-5Z" />
+          <path d="m3 12 9 5 9-5" />
+          <path d="m3 17 9 5 9-5" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'database' && (
+      <>
+        <>
+          <ellipse cx="12" cy="5" rx="8" ry="3" />
+          <path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5" />
+          <path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'shield' && (
+      <>
+        <>
+          <path d="M12 2 20 5v6c0 5-3.4 8.8-8 11-4.6-2.2-8-6-8-11V5l8-3Z" />
+          <path d="m8.5 12 2.2 2.2 4.8-5" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'mail' && (
+      <>
+        <>
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="m4 7 8 6 8-6" />
+        </>
+      </>
+    )
+  }
+  {
+    name === 'external' && (
+      <>
+        <>
+          <path d="M13 5h6v6" />
+          <path d="m19 5-8 8" />
+          <path d="M17 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h5" />
+        </>
+      </>
+    )
+  }
+</svg>

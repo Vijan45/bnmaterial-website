@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 ---
 
@@ -7,81 +8,125 @@ import { site } from '../config/site';
   title="Contact"
   description="Contact BN Material about research collaboration, scientific software, materials characterization, computation, training, consulting, or technical inquiries."
 >
-  <section class="page-hero">
-    <div class="shell page-hero-inner">
-      <div class="page-hero-copy" data-reveal>
-        <p class="eyebrow">Contact BN Material</p>
+  <section class="inner-hero contact-hero">
+    <div class="shell inner-hero-grid">
+      <div class="inner-hero-copy" data-reveal>
+        <span class="kicker">Contact BN Material</span>
         <h1>Start a focused scientific conversation.</h1>
         <p>
           Describe the materials system, scientific question, data type, software need, or
           collaboration objective. The form prepares an email in your local mail application.
         </p>
+        <div class="contact-direct">
+          <span><Icon name="mail" size={18} /></span><div>
+            <small>Direct email</small><a href={`mailto:${site.contactEmail}`}
+              >{site.contactEmail}</a
+            >
+          </div>
+        </div>
       </div>
-      <aside class="page-hero-aside" data-reveal>
-        <span>Inquiry scope</span>
-        <strong>Research + software</strong>
-        <p>
-          Materials science, computation, characterization, data systems, training, and
-          scientific-software development.
-        </p>
-      </aside>
+      <div class="contact-scope" data-reveal>
+        <span class="kicker">Useful context to include</span>
+        {
+          [
+            'Material system and objective',
+            'Available experimental or computational data',
+            'Current workflow and constraints',
+            'Expected output or decision',
+            'Relevant platform and timeline',
+          ].map((item, index) => (
+            <div>
+              <>
+                <span>0{index + 1}</span>
+                <p>{item}</p>
+              </>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </section>
 
-  <section class="page-section">
+  <section class="section compact-top contact-section">
     <div class="shell contact-layout">
       <form class="contact-form" id="contact-form" data-reveal>
-        <div class="form-field">
-          <label for="name">Name</label>
-          <input id="name" name="name" required autocomplete="name" />
+        <div class="form-head">
+          <span class="kicker">Inquiry form</span><h2>Prepare a structured message.</h2><p>
+            No submission is stored by this static website.
+          </p>
         </div>
-        <div class="form-field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required autocomplete="email" />
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="name">Name</label><input
+              id="name"
+              name="name"
+              required
+              autocomplete="name"
+              placeholder="Your name"
+            />
+          </div>
+          <div class="form-field">
+            <label for="email">Email</label><input
+              id="email"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+              placeholder="you@example.com"
+            />
+          </div>
+          <div class="form-field full">
+            <label for="category">Inquiry category</label><select id="category" name="category"
+              ><option>Research collaboration</option><option>Scientific software</option><option
+                >Materials characterization</option
+              ><option>Computational materials science</option><option
+                >Consulting or training</option
+              ><option>General inquiry</option></select
+            >
+          </div>
+          <div class="form-field full">
+            <label for="message">Scientific or technical context</label><textarea
+              id="message"
+              name="message"
+              required
+              placeholder="Describe the material system, objective, available data, constraints, and expected outcome."
+            ></textarea>
+          </div>
+          <div hidden>
+            <label for="website">Leave blank</label><input
+              id="website"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+          <p class="form-note full">
+            By continuing, you choose to share these details by email for the purpose of receiving a
+            response.
+          </p>
+          <button class="button button-accent" type="submit"
+            ><span>Prepare email</span><Icon name="arrow-up-right" size={17} /></button
+          >
+          <p id="form-status" role="status"></p>
         </div>
-        <div class="form-field full">
-          <label for="category">Inquiry category</label>
-          <select id="category" name="category">
-            <option>Research collaboration</option>
-            <option>Scientific software</option>
-            <option>Materials characterization</option>
-            <option>Computational materials science</option>
-            <option>Consulting or training</option>
-            <option>General inquiry</option>
-          </select>
-        </div>
-        <div class="form-field full">
-          <label for="message">Scientific or technical context</label>
-          <textarea
-            id="message"
-            name="message"
-            required
-            placeholder="Describe the material system, objective, available data, constraints, and expected outcome."
-          ></textarea>
-        </div>
-        <div hidden>
-          <label for="website">Leave blank</label>
-          <input id="website" name="website" tabindex="-1" autocomplete="off" />
-        </div>
-        <p class="form-note full">
-          By continuing, you choose to share these details by email for the purpose of receiving a
-          response.
-        </p>
-        <button class="button button-primary" type="submit"
-          ><span>Prepare email</span><b>↗</b></button
-        >
-        <p id="form-status" role="status"></p>
       </form>
       <aside class="contact-aside" data-reveal>
-        <p class="micro-label">Direct contact</p>
-        <h2>Use a clear subject and sufficient context.</h2>
+        <span class="kicker">Inquiry scope</span>
+        <h2>Research + software + engineering.</h2>
         <p>
-          For research or software discussions, include the relevant data type, target material,
-          current workflow, platform, timeline, and any non-negotiable scientific requirements.
+          Suitable discussions include materials characterization, computational workflows, research
+          planning, analysis-system design, scientific visualization, training, and
+          scientific-software development.
         </p>
-        <p>No password, SMTP credential, or visitor submission is stored by this static website.</p>
-        <a class="contact-email" href={`mailto:${site.contactEmail}`}
-          ><span>{site.contactEmail}</span><b>↗</b></a
+        <div class="contact-boundary">
+          <Icon name="shield" size={24} /><div>
+            <strong>Privacy boundary</strong><p>
+              No password, SMTP credential, or visitor submission is stored by this static website.
+            </p>
+          </div>
+        </div>
+        <a class="button button-dark" href={`mailto:${site.contactEmail}`}
+          ><span>Email directly</span><Icon name="mail" size={17} /></a
         >
       </aside>
     </div>

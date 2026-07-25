@@ -1,12 +1,12 @@
 export const site = {
   name: 'BN Material',
-  tagline: 'Materials engineering across scales.',
-  supportingLine: 'Research, computation, characterization, and scientific software.',
+  tagline: 'Materials intelligence across scales.',
+  supportingLine:
+    'Research systems, computational insight, characterization, and scientific software for better materials decisions.',
   url: 'https://bnmaterial.com',
   sisterSite: 'https://bhijan.com.np',
   founder: 'Bhijan Neupane',
-  affiliation:
-    'Materials Science and Nanotechnology Laboratory, Faculty of Technology, Nepal Academy of Science and Technology (NAST), Nepal',
+  affiliation: 'Materials Science and Nanotechnology Laboratory, Faculty of Technology',
   contactEmail: 'info@bnmaterial.com',
   emailConfirmed: false,
 };
@@ -20,7 +20,7 @@ export const topics = [
       'Defect-aware crystal design, responsive lattices, crack closure, phase selection, and autonomous repair mechanisms.',
     methods: ['Crystal growth', 'Defect chemistry', 'In situ analysis', 'Healing kinetics'],
     visual: 'crystal',
-    accent: 'cyan',
+    accent: 'aqua',
   },
   {
     slug: 'computational-materials-molecular-dynamics',
@@ -50,7 +50,7 @@ export const topics = [
       'Photovoltaic absorbers, charge extraction, stability, catalytic energy conversion, and device-scale performance.',
     methods: ['Photovoltaics', 'Photoelectrochemistry', 'Impedance', 'Stability testing'],
     visual: 'solar',
-    accent: 'amber',
+    accent: 'gold',
   },
   {
     slug: 'biomaterials-anticancer-platforms',
@@ -60,7 +60,7 @@ export const topics = [
       'Biointerfaces, drug-delivery materials, anticancer nanoplatforms, toxicity-aware design, and therapeutic response.',
     methods: ['Drug delivery', 'Biointerfaces', 'Cytotoxicity', 'Targeted systems'],
     visual: 'bio',
-    accent: 'rose',
+    accent: 'coral',
   },
   {
     slug: 'ceramics-high-temperature-materials',
@@ -153,7 +153,7 @@ export const products = [
       'Expanded computational-spectrum workflows',
       'Instrument-aware import',
     ],
-    accent: 'cyan',
+    accent: 'aqua',
     visual: 'spectra',
   },
   {
@@ -174,7 +174,7 @@ export const products = [
       'Uncertainty reporting',
       'Cross-image comparative dashboards',
     ],
-    accent: 'emerald',
+    accent: 'green',
     visual: 'micrograph',
   },
   {
@@ -191,7 +191,7 @@ export const products = [
       'Multi-sample comparison and report-ready output',
     ],
     planned: ['Kinetic model library', 'Instrument templates', 'Automated quality-control checks'],
-    accent: 'amber',
+    accent: 'gold',
     visual: 'thermal',
   },
 ];

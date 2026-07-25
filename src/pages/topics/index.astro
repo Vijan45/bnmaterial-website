@@ -1,50 +1,116 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { topics } from '../../config/site';
+import Icon from '../../components/Icon.astro';
+import { engineeringScales, topics } from '../../config/site';
 ---
 
 <Base
   title="Materials Engineering Domains"
   description="Explore twelve connected BN Material domains spanning crystal engineering, molecular dynamics, semiconductors, energy, biomaterials, ceramics, polymers, nanomaterials, metallurgy, catalysis, characterization, and manufacturing."
 >
-  <section class="page-hero">
-    <div class="shell page-hero-inner">
-      <div class="page-hero-copy" data-reveal>
-        <p class="eyebrow">Materials atlas / 12 domains</p>
-        <h1>The full materials-engineering landscape.</h1>
+  <section class="inner-hero atlas-hero">
+    <div class="shell inner-hero-grid">
+      <div class="inner-hero-copy" data-reveal>
+        <span class="kicker">Materials atlas / 12 connected domains</span>
+        <h1>The complete materials-engineering landscape.</h1>
         <p>
-          Organized around scientific mechanisms, material classes, analytical methods, and
-          engineering translation—from electronic structure to industrial systems.
+          Organized around mechanisms, material classes, analytical evidence, computational models,
+          processing history, and engineering translation.
         </p>
+        <div class="hero-actions">
+          <a class="button button-accent" href="#domain-index"
+            ><span>Explore the atlas</span><Icon name="arrow-down" size={17} /></a
+          >
+          <a class="button button-ghost" href="/research"
+            ><span>Research framework</span><Icon name="arrow-up-right" size={17} /></a
+          >
+        </div>
       </div>
-      <aside class="page-hero-aside" data-reveal>
-        <span>Domain architecture</span>
-        <strong>12 × 06</strong>
-        <p>Twelve materials domains connected across six engineering scales.</p>
-      </aside>
+      <div class="atlas-map" data-reveal>
+        <div class="atlas-orbit"><span></span><span></span><span></span></div>
+        <div class="atlas-center"><strong>12</strong><small>material domains</small></div>
+        {
+          topics.slice(0, 8).map((topic, index) => (
+            <span class:list={['atlas-node', `node-${index + 1}`, `accent-${topic.accent}`]}>
+              <Icon name={topic.visual} size={20} />
+            </span>
+          ))
+        }
+        <div class="atlas-data">
+          <span>06 scales</span><span>48 methods</span><span>01 connected system</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="page-section">
-    <div class="shell topic-index-grid">
+  <section class="section compact-top" id="domain-index">
+    <div class="shell section-heading" data-reveal>
+      <div>
+        <span class="kicker">Domain index</span><h2>
+          Navigate by scientific question, not isolated instrument.
+        </h2>
+      </div>
+      <p>
+        Each hub connects fundamentals, experimental evidence, computation, process history,
+        performance, and responsible application.
+      </p>
+    </div>
+    <div class="shell domain-grid domain-grid-index">
       {
         topics.map((topic, index) => (
           <a
-            class:list={['topic-index-card', `accent-${topic.accent}`]}
+            class:list={['domain-card', `accent-${topic.accent}`]}
             href={`/topics/${topic.slug}`}
             data-reveal
+            data-spotlight
             data-tilt
           >
-            <span>{String(index + 1).padStart(2, '0')}</span>
-            <div class="mini-glyph" aria-hidden="true" />
+            <div class="domain-card-top">
+              <>
+                <span class="domain-number">{String(index + 1).padStart(2, '0')}</span>
+                <span class="domain-icon">
+                  <Icon name={topic.visual} size={29} />
+                </span>
+              </>
+            </div>
             <h3>{topic.title}</h3>
             <p>{topic.summary}</p>
-            <div class="topic-methods">
+            <div class="domain-methods">
               {topic.methods.map((method) => (
                 <small>{method}</small>
               ))}
             </div>
+            <div class="domain-card-footer">
+              <>
+                <span>Open domain</span>
+                <Icon name="arrow-up-right" size={17} />
+              </>
+            </div>
           </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section section-scales page-scales">
+    <div class="shell scales-intro" data-reveal>
+      <span class="kicker">Scale architecture</span>
+      <h2>Every domain is evaluated across the same six-scale continuum.</h2>
+    </div>
+    <div class="shell scale-track" data-reveal>
+      <div class="scale-beam"><span></span></div>
+      {
+        engineeringScales.map(([scale, description], index) => (
+          <article>
+            <>
+              <span>0{index + 1}</span>
+              <div class="scale-node">
+                <i />
+              </div>
+              <h3>{scale}</h3>
+              <p>{description}</p>
+            </>
+          </article>
         ))
       }
     </div>

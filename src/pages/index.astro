@@ -1,208 +1,211 @@
 ---
 import Base from '../layouts/Base.astro';
-import { engineeringScales, products, site, topics } from '../config/site';
+import Icon from '../components/Icon.astro';
+import ProductVisual from '../components/ProductVisual.astro';
+import { engineeringScales, products, topics } from '../config/site';
 
-const capabilities = [
-  ['Experimental', 'Synthesis, processing, characterization, and mechanism-aware validation.'],
-  ['Computational', 'Electronic structure, molecular simulation, and model-based interpretation.'],
-  ['Analytical', 'Reproducible data systems, quantitative analysis, and scientific visualization.'],
+const workflow: Array<[string, string, string]> = [
   [
-    'Translational',
-    'Engineering decisions that connect performance, reliability, scale, and deployment.',
+    'Frame the question',
+    'Define the material system, evidence boundary, constraints, and decision that the work must support.',
+    'layers',
+  ],
+  [
+    'Connect the scales',
+    'Relate composition, bonding, defects, interfaces, microstructure, processing, and system performance.',
+    'molecular',
+  ],
+  [
+    'Interrogate the evidence',
+    'Combine calibrated experiments, computation, literature context, uncertainty, and reproducible analysis.',
+    'signal',
+  ],
+  [
+    'Translate the insight',
+    'Turn mechanisms and data into defensible figures, software workflows, research plans, and engineering choices.',
+    'process',
   ],
 ];
 ---
 
 <Base
   title="BN Material"
-  description="A broad materials-engineering platform spanning crystal engineering, molecular dynamics, semiconductors, solar cells, biomaterials, ceramics, polymers, nanomaterials, metallurgy, catalysis, characterization, and processing."
+  description="BN Material connects materials research, computation, characterization, data systems, and scientific software across scales."
 >
-  <section class="hero">
-    <div class="hero-glow hero-glow-a" aria-hidden="true"></div>
-    <div class="hero-glow hero-glow-b" aria-hidden="true"></div>
+  <section class="home-hero">
     <div class="shell hero-layout">
       <div class="hero-copy" data-reveal>
-        <p class="hero-kicker"><i></i> Materials science · computation · software</p>
-        <h1>
-          Materials engineered
-          <span>for what comes next.</span>
-        </h1>
-        <p class="hero-lead">
-          BN Material connects mechanisms, experiments, computation, characterization, and
-          purpose-built software across the full materials-engineering landscape.
+        <div class="hero-kicker">
+          <span class="pulse-dot"></span>Materials intelligence · research systems · scientific
+          software
+        </div>
+        <h1>Build better materials.<br /><em>Understand every scale.</em></h1>
+        <p>
+          BN Material connects experimental evidence, computational models, characterization,
+          scientific visualization, and purpose-built software into one rigorous engineering
+          framework.
         </p>
         <div class="hero-actions">
-          <a class="button button-primary" href="/topics"
-            ><span>Explore the materials landscape</span><b>↗</b></a
+          <a class="button button-accent" href="/research"
+            ><span>Explore the research framework</span><Icon name="arrow-up-right" size={18} /></a
           >
-          <a class="button button-outline" href="/software"
-            ><span>Discover scientific software</span><b>→</b></a
+          <a class="button button-ghost" href="/software"
+            ><span>View scientific software</span><Icon name="arrow-right" size={18} /></a
           >
         </div>
-        <div class="hero-proof" aria-label="Platform principles">
-          <span>Atomic → system</span>
-          <span>Experiment + computation</span>
-          <span>Evidence-led</span>
+        <div class="hero-proof">
+          <div><strong>12</strong><span>connected materials domains</span></div>
+          <div><strong>06</strong><span>engineering scales</span></div>
+          <div><strong>03</strong><span>software environments</span></div>
         </div>
       </div>
 
-      <div class="hero-spectrum" data-reveal aria-label="Conceptual multiscale materials field">
-        <div class="spectrum-topline">
-          <span>Material response field</span>
-          <small>Conceptual visualization</small>
-        </div>
-        <svg viewBox="0 0 700 620" role="img" aria-labelledby="spectrum-title spectrum-desc">
-          <title id="spectrum-title">Connected materials engineering scales</title>
-          <desc id="spectrum-desc">
-            Abstract spectral curves connect electronic, atomic, microstructural, and system scales.
-            The illustration is conceptual and is not measured data.
-          </desc>
-          <defs>
-            <linearGradient id="spectrum-a" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#00f5ff"></stop>
-              <stop offset=".48" stop-color="#7d6dff"></stop>
-              <stop offset="1" stop-color="#ff4fd8"></stop>
-            </linearGradient>
-            <linearGradient id="spectrum-b" x1="0" y1="1" x2="1" y2="0">
-              <stop offset="0" stop-color="#00f5ff" stop-opacity=".05"></stop>
-              <stop offset=".5" stop-color="#7d6dff" stop-opacity=".68"></stop>
-              <stop offset="1" stop-color="#ffd84d" stop-opacity=".16"></stop>
-            </linearGradient>
-            <radialGradient id="spectrum-core">
-              <stop offset="0" stop-color="#fff" stop-opacity=".96"></stop>
-              <stop offset=".18" stop-color="#00f5ff" stop-opacity=".8"></stop>
-              <stop offset=".54" stop-color="#7d6dff" stop-opacity=".28"></stop>
-              <stop offset="1" stop-color="#7d6dff" stop-opacity="0"></stop>
-            </radialGradient>
-          </defs>
-          <g class="spectrum-grid">
-            <path d="M54 92H646M54 202H646M54 312H646M54 422H646M54 532H646"></path>
-            <path d="M95 55V565M220 55V565M345 55V565M470 55V565M595 55V565"></path>
-          </g>
-          <circle class="spectrum-halo spectrum-halo-wide" cx="354" cy="307" r="202"></circle>
-          <circle class="spectrum-halo spectrum-halo-mid" cx="354" cy="307" r="134"></circle>
-          <circle class="spectrum-core" cx="354" cy="307" r="116" fill="url(#spectrum-core)"
-          ></circle>
-          <g class="spectrum-curves">
-            <path class="curve curve-a" d="M48 415C151 134 247 541 349 278S548 138 660 334"></path>
-            <path class="curve curve-b" d="M44 344C172 502 230 105 361 348S543 498 659 196"></path>
-            <path class="curve curve-c" d="M42 250C159 77 231 457 357 265S545 197 662 421"></path>
-            <path class="curve curve-d" d="M52 500C181 354 223 158 357 221S535 528 652 119"></path>
-          </g>
-          <g class="spectrum-points">
-            <g transform="translate(116 395)">
-              <circle r="7"></circle><text x="0" y="26">ELECTRONIC</text>
-            </g>
-            <g transform="translate(276 179)">
-              <circle r="7"></circle><text x="0" y="-18">ATOMIC</text>
-            </g>
-            <g transform="translate(477 395)">
-              <circle r="7"></circle><text x="0" y="27">MICROSTRUCTURE</text>
-            </g>
-            <g transform="translate(593 206)">
-              <circle r="7"></circle><text x="0" y="-18">SYSTEM</text>
-            </g>
-          </g>
-        </svg>
-        <div class="spectrum-footer">
-          <span>Composition</span><i></i><span>Structure</span><i></i><span>Process</span><i
-          ></i><span>Performance</span>
+      <div class="hero-visual-wrap" data-reveal data-tilt>
+        <div class="hero-visual" data-spotlight>
+          <canvas id="materials-field" aria-label="Interactive conceptual materials lattice"
+          ></canvas>
+          <div class="visual-topbar">
+            <span><i></i> Materials system map</span>
+            <small>Conceptual visualization</small>
+          </div>
+          <div class="hero-core">
+            <span class="core-ring ring-one"></span>
+            <span class="core-ring ring-two"></span>
+            <span class="core-ring ring-three"></span>
+            <div class="core-mark"><img src="/brand/bn-monogram-mono.svg" alt="" /></div>
+          </div>
+          <div class="data-card data-card-a">
+            <span>Structure–property path</span>
+            <strong>Composition → interface → function</strong>
+            <div class="mini-path"><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="data-card data-card-b">
+            <span>Analysis stack</span>
+            <div class="stack-bars">
+              <i style="--v:82%"></i><i style="--v:61%"></i><i style="--v:73%"></i><i
+                style="--v:48%"></i>
+            </div>
+            <small>Experiment · computation · data</small>
+          </div>
+          <div class="data-card data-card-c">
+            <span>Scale coupling</span>
+            <strong>e⁻ → atom → device</strong>
+            <small>Mechanism retained across transitions</small>
+          </div>
+          <div class="visual-axis axis-x"><span>structure</span></div>
+          <div class="visual-axis axis-y"><span>performance</span></div>
         </div>
       </div>
     </div>
-    <div class="shell hero-rail" aria-label="BN Material scope">
-      <span>01 <b>Research</b></span>
-      <span>02 <b>Characterization</b></span>
-      <span>03 <b>Computation</b></span>
-      <span>04 <b>Scientific software</b></span>
+
+    <div class="shell capability-ribbon" aria-label="Core methods">
+      {
+        [
+          'Electronic structure',
+          'Molecular dynamics',
+          'X-ray diffraction',
+          'Spectroscopy',
+          'Microscopy',
+          'Thermal analysis',
+          'Materials informatics',
+          'Process engineering',
+        ].map((item) => (
+          <span>
+            <i />
+            {item}
+          </span>
+        ))
+      }
     </div>
   </section>
 
-  <section class="intro-section section-space">
-    <div class="shell intro-layout">
-      <div data-reveal>
-        <p class="micro-label">A connected materials platform</p>
-        <h2>
-          One field.<br />
-          <span>Every relevant scale.</span>
-        </h2>
-      </div>
-      <div class="intro-copy" data-reveal>
-        <p class="intro-lead">
-          Useful materials knowledge does not live inside a single instrument, simulation, or
-          discipline.
-        </p>
-        <p>
-          BN Material is structured around the relationships between composition, structure,
-          processing, properties, and performance. Experimental evidence, computational
-          interpretation, and software practice remain connected without blurring their boundaries.
-        </p>
-        <a class="text-link" href="/research">Read the research framework <span>↗</span></a>
-      </div>
-    </div>
-    <div class="shell discipline-rail" data-reveal>
-      <span>Materials research</span>
-      <span>Computational modeling</span>
-      <span>Scientific data systems</span>
-      <span>Engineering translation</span>
-    </div>
-  </section>
-
-  <section class="topics-section section-space">
+  <section class="section section-domains">
     <div class="shell section-heading" data-reveal>
       <div>
-        <p class="micro-label">01 / Materials landscape</p>
-        <h2>Twelve topics.<br /><span>One connected framework.</span></h2>
+        <span class="kicker">Materials atlas / 12 domains</span><h2>
+          A broader view of materials engineering.
+        </h2>
       </div>
-      <p>
-        Explore the mechanisms, material classes, analytical methods, and engineering decisions that
-        shape modern materials science.
-      </p>
+      <div>
+        <p>
+          Move beyond isolated techniques. Explore the connected scientific domains that determine
+          how materials are designed, measured, modeled, processed, and deployed.
+        </p><a class="inline-link" href="/topics"
+          >Open the complete atlas <Icon name="arrow-up-right" size={16} /></a
+        >
+      </div>
     </div>
-    <div class="shell topic-directory">
+
+    <div class="shell domain-grid">
       {
         topics.map((topic, index) => (
           <a
-            class:list={['topic-row', `accent-${topic.accent}`]}
+            class:list={['domain-card', `accent-${topic.accent}`]}
             href={`/topics/${topic.slug}`}
             data-reveal
+            data-spotlight
+            data-tilt
           >
-            <span class="topic-number">{String(index + 1).padStart(2, '0')}</span>
-            <div>
-              <h3>{topic.shortTitle}</h3>
-              <p>{topic.methods.slice(0, 3).join(' · ')}</p>
+            <div class="domain-card-top">
+              <>
+                <span class="domain-number">{String(index + 1).padStart(2, '0')}</span>
+                <span class="domain-icon">
+                  <Icon name={topic.visual} size={29} />
+                </span>
+              </>
             </div>
-            <b aria-hidden="true">↗</b>
+            <h3>{topic.title}</h3>
+            <p>{topic.summary}</p>
+            <div class="domain-methods">
+              {topic.methods.slice(0, 3).map((method) => (
+                <small>{method}</small>
+              ))}
+            </div>
+            <div class="domain-card-footer">
+              <>
+                <span>Explore domain</span>
+                <Icon name="arrow-up-right" size={17} />
+              </>
+            </div>
           </a>
         ))
       }
     </div>
-    <div class="shell section-end" data-reveal>
-      <a class="text-link" href="/topics">Explore all materials topics <span>↗</span></a>
-    </div>
   </section>
 
-  <section class="scale-section section-space">
-    <div class="shell scale-layout">
-      <div class="scale-intro" data-reveal>
-        <p class="micro-label">02 / Multiscale thinking</p>
-        <h2>From bonding<br />to deployment.</h2>
+  <section class="section section-workflow">
+    <div class="shell workflow-layout">
+      <div class="workflow-intro" data-reveal>
+        <span class="kicker">A rigorous operating model</span>
+        <h2>From scientific question to engineering decision.</h2>
         <p>
-          Materials performance emerges through connected scales. Each level informs the next
-          without pretending that one model can explain the whole system.
+          Every project is treated as a connected reasoning system. The goal is not more output; it
+          is clearer evidence, stronger interpretation, and a workflow another researcher can
+          inspect.
         </p>
-        <a class="text-link" href="/research">Explore the research logic <span>↗</span></a>
+        <a class="button button-dark" href="/research"
+          ><span>See the complete framework</span><Icon name="arrow-up-right" size={17} /></a
+        >
       </div>
-      <div class="scale-stack" data-reveal>
+      <div class="workflow-steps">
         {
-          engineeringScales.map(([scale, description], index) => (
-            <article style={`--scale-index:${index}`}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <div>
-                <h3>{scale}</h3>
-                <p>{description}</p>
+          workflow.map(([title, copy, icon], index) => (
+            <article data-reveal>
+              <div class="step-index">
+                <>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <i />
+                </>
               </div>
-              <i />
+              <div class="step-icon">
+                <Icon name={icon} size={26} />
+              </div>
+              <div>
+                <>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </>
+              </div>
             </article>
           ))
         }
@@ -210,63 +213,80 @@ const capabilities = [
     </div>
   </section>
 
-  <section class="software-section section-space">
-    <div class="shell software-heading" data-reveal>
+  <section class="section section-software">
+    <div class="shell section-heading heading-light" data-reveal>
       <div>
-        <p class="micro-label">03 / Scientific software</p>
-        <h2>Tools shaped by<br /><span>real analytical work.</span></h2>
+        <span class="kicker">Scientific software / 03 systems</span><h2>
+          Analysis environments designed around real laboratory work.
+        </h2>
       </div>
-      <p>
-        Purpose-built environments for traceable analysis, meaningful controls, and
-        publication-ready scientific output.
-      </p>
+      <div>
+        <p>
+          Interfaces make assumptions, controls, annotations, comparisons, and exports
+          visible—without hiding scientific decisions behind automation.
+        </p><a class="inline-link" href="/software"
+          >Open the software catalogue <Icon name="arrow-up-right" size={16} /></a
+        >
+      </div>
     </div>
-    <div class="shell software-list">
+
+    <div class="shell software-showcase">
       {
         products.map((product, index) => (
-          <a
-            class:list={['software-entry', `accent-${product.accent}`]}
-            href={`/software/${product.slug}`}
-            data-reveal
-          >
-            <span class="software-number">0{index + 1}</span>
-            <div class="software-title">
-              <small>{product.category}</small>
+          <article class:list={['software-feature', `accent-${product.accent}`]} data-reveal>
+            <div class="software-feature-copy">
+              <div class="software-meta">
+                <>
+                  <span>0{index + 1}</span>
+                  <small>{product.status}</small>
+                </>
+              </div>
+              <span class="kicker">{product.category}</span>
               <h3>{product.name}</h3>
+              <p>{product.summary}</p>
+              <ul>
+                {product.features.slice(0, 3).map((feature) => (
+                  <li>
+                    <Icon name="check" size={16} />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <a class="button button-light" href={`/software/${product.slug}`}>
+                <>
+                  <span>Explore the system</span>
+                  <Icon name="arrow-up-right" size={17} />
+                </>
+              </a>
             </div>
-            <p>{product.summary}</p>
-            <div class="software-status">
-              <span>{product.status}</span>
-              <b>↗</b>
+            <div class="software-feature-visual">
+              <ProductVisual visual={product.visual} name={product.name} compact />
             </div>
-            <div class={`software-signal signal-${product.visual}`} aria-hidden="true">
-              <>
-                <i />
-                <i />
-                <i />
-                <i />
-              </>
-            </div>
-          </a>
+          </article>
         ))
       }
     </div>
-    <div class="shell section-end" data-reveal>
-      <a class="text-link" href="/software">View the software catalogue <span>↗</span></a>
-    </div>
   </section>
 
-  <section class="approach-section section-space">
-    <div class="shell capability-heading" data-reveal>
-      <p class="micro-label">04 / Integrated practice</p>
-      <h2>Depth where it matters.<br /><span>Clarity everywhere.</span></h2>
+  <section class="section section-scales">
+    <div class="shell scales-intro" data-reveal>
+      <span class="kicker">One continuum / six engineering scales</span>
+      <h2>Properties emerge across scales. The analysis should too.</h2>
+      <p>
+        Each scale changes the dominant variables, available evidence, and engineering consequences.
+        The framework keeps those transitions explicit.
+      </p>
     </div>
-    <div class="shell capability-grid">
+    <div class="shell scale-track" data-reveal>
+      <div class="scale-beam" aria-hidden="true"><span></span></div>
       {
-        capabilities.map(([title, description], index) => (
-          <article data-reveal>
-            <span>{String(index + 1).padStart(2, '0')}</span>
-            <h3>{title}</h3>
+        engineeringScales.map(([scale, description], index) => (
+          <article>
+            <span>0{index + 1}</span>
+            <div class="scale-node">
+              <i />
+            </div>
+            <h3>{scale}</h3>
             <p>{description}</p>
           </article>
         ))
@@ -274,29 +294,34 @@ const capabilities = [
     </div>
   </section>
 
-  <section class="mission-section">
-    <div class="shell mission-layout">
-      <div class="mission-note" data-reveal>
-        <span>Independent platform</span>
-        <span>Nepal</span>
-      </div>
-      <div class="mission-copy" data-reveal>
-        <p class="micro-label">BN Material</p>
-        <h2>
-          Scientific ambition,<br />
-          <span>with evidence in command.</span>
-        </h2>
+  <section class="section section-principles">
+    <div class="shell principles-grid">
+      <article class="principle-lead" data-reveal>
+        <span class="kicker">Scientific clarity by design</span>
+        <h2>Evidence, computation, and interpretation remain visibly distinct.</h2>
         <p>
-          Founded by {site.founder}, BN Material is a broad materials-engineering ecosystem:
-          rigorous about scientific claims, explicit about product status, and designed to make
-          complex work easier to understand.
+          Conceptual graphics are labeled. Product status is explicit. Claims expand only when
+          evidence supports them.
         </p>
-        <div class="mission-links">
-          <a class="button button-light" href="/about"><span>About BN Material</span><b>↗</b></a>
-          <a class="button button-dark" href="/contact"><span>Start a conversation</span><b>→</b></a
-          >
-        </div>
-      </div>
+      </article>
+      <article class="principle-card" data-reveal data-spotlight>
+        <Icon name="shield" size={30} /><h3>Traceable evidence</h3><p>
+          Measured data, calculated output, literature context, assumptions, and visual concepts are
+          separated.
+        </p>
+      </article>
+      <article class="principle-card" data-reveal data-spotlight>
+        <Icon name="layers" size={30} /><h3>Scale-aware reasoning</h3><p>
+          Electronic, atomic, nano, microstructural, component, and system behavior remain
+          connected.
+        </p>
+      </article>
+      <article class="principle-card" data-reveal data-spotlight>
+        <Icon name="database" size={30} /><h3>Reproducible workflows</h3><p>
+          Methods, controls, data lineage, software state, and export decisions are designed to be
+          inspectable.
+        </p>
+      </article>
     </div>
   </section>
 </Base>

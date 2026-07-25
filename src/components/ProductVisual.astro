@@ -1,0 +1,150 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  visual: 'spectra' | 'micrograph' | 'thermal' | string;
+  name: string;
+  compact?: boolean;
+}
+const { visual, name, compact = false } = Astro.props;
+---
+
+<div
+  class:list={['product-visual', `visual-${visual}`, { compact }]}
+  aria-label={`${name} conceptual interface visualization`}
+>
+  <div class="product-window-bar">
+    <div><i></i><i></i><i></i></div>
+    <span>BN / Scientific workspace</span>
+    <small>Concept interface</small>
+  </div>
+  <div class="product-window-body">
+    <aside class="product-tools" aria-hidden="true">
+      <span class="active"><Icon name={visual} size={17} /></span>
+      <span><Icon name="layers" size={17} /></span>
+      <span><Icon name="database" size={17} /></span>
+      <span><Icon name="process" size={17} /></span>
+    </aside>
+    <div class="product-stage">
+      <div class="stage-header"><span>Primary analysis</span><small>Traceable workflow</small></div>
+      {
+        visual === 'spectra' && (
+          <svg
+            class="analysis-chart spectra-chart"
+            viewBox="0 0 720 330"
+            role="img"
+            aria-label="Conceptual spectral plot"
+          >
+            <defs>
+              <linearGradient id="spectraFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="currentColor" stop-opacity=".2" />
+                <stop offset="1" stop-color="currentColor" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <g class="chart-grid">
+              <>
+                <path d="M55 20v265M170 20v265M285 20v265M400 20v265M515 20v265M630 20v265" />
+                <path d="M55 55h620M55 115h620M55 175h620M55 235h620M55 285h620" />
+              </>
+            </g>
+            <path
+              class="area"
+              d="M55 272C95 267 112 250 130 242c28-12 25-117 49-118 22-1 27 111 51 112 23 1 21-48 39-53 22-5 25 74 50 72 25-2 25-197 54-198 31-1 32 202 62 204 23 1 29-75 55-79 30-4 35 60 59 61 29 2 35-164 66-165 33 0 30 169 63 175 22 4 44 5 67 9v23H55Z"
+              fill="url(#spectraFill)"
+            />
+            <path
+              class="curve main"
+              d="M55 272C95 267 112 250 130 242c28-12 25-117 49-118 22-1 27 111 51 112 23 1 21-48 39-53 22-5 25 74 50 72 25-2 25-197 54-198 31-1 32 202 62 204 23 1 29-75 55-79 30-4 35 60 59 61 29 2 35-164 66-165 33 0 30 169 63 175 22 4 44 5 67 9"
+            />
+            <path
+              class="curve secondary"
+              d="M55 257c70-10 91-54 133-57 52-4 71 37 118 28 53-11 57-101 112-98 56 3 69 100 126 93 48-6 72-82 131-72"
+            />
+            <g class="peak-lines">
+              <>
+                <path d="M179 124v-35" />
+                <path d="M373 57V27" />
+                <path d="M615 78V43" />
+              </>
+            </g>
+            <g class="chart-labels">
+              <>
+                <text x="163" y="77">
+                  P1
+                </text>
+                <text x="357" y="20">
+                  P2
+                </text>
+                <text x="599" y="35">
+                  P3
+                </text>
+              </>
+            </g>
+          </svg>
+        )
+      }
+      {
+        visual === 'micrograph' && (
+          <div class="micrograph-stage" aria-hidden="true">
+            {Array.from({ length: 34 }).map((_, index) => (
+              <i style={`--i:${index}`} />
+            ))}
+            <span class="scale-bar">2 μm</span>
+            <span class="segmentation-badge">Segmentation overlay</span>
+          </div>
+        )
+      }
+      {
+        visual === 'thermal' && (
+          <svg
+            class="analysis-chart thermal-chart"
+            viewBox="0 0 720 330"
+            role="img"
+            aria-label="Conceptual thermal-analysis plot"
+          >
+            <g class="chart-grid">
+              <>
+                <path d="M55 20v265M170 20v265M285 20v265M400 20v265M515 20v265M630 20v265" />
+                <path d="M55 55h620M55 115h620M55 175h620M55 235h620M55 285h620" />
+              </>
+            </g>
+            <path
+              class="curve main"
+              d="M55 65c72 0 103 5 128 20 40 24 33 66 75 80 32 11 65 1 92 28 27 26 18 59 59 71 52 15 130 4 266 6"
+            />
+            <path
+              class="curve secondary"
+              d="M55 247c85 0 119-1 153-7 42-8 25-49 70-51 48-3 31 52 78 50 49-3 36-107 83-111 44-4 39 90 83 91 49 1 78-15 153-9"
+            />
+            <g class="event-lines">
+              <>
+                <path d="M183 48v225" />
+                <path d="M350 48v225" />
+                <path d="M523 48v225" />
+              </>
+            </g>
+            <g class="chart-labels">
+              <>
+                <text x="151" y="37">
+                  Stage I
+                </text>
+                <text x="318" y="37">
+                  Stage II
+                </text>
+                <text x="491" y="37">
+                  Stage III
+                </text>
+              </>
+            </g>
+          </svg>
+        )
+      }
+    </div>
+    <aside class="product-inspector">
+      <span>Analysis controls</span>
+      <label><b>Signal</b><i style="--value:74%"></i></label>
+      <label><b>Threshold</b><i style="--value:48%"></i></label>
+      <label><b>Resolution</b><i style="--value:66%"></i></label>
+      <div class="inspector-stat"><small>Workflow state</small><strong>Review</strong></div>
+    </aside>
+  </div>
+</div>

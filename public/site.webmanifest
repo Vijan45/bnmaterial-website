@@ -1,11 +1,11 @@
 {
   "name": "BN Material",
   "short_name": "BN Material",
-  "description": "Materials engineering across scales.",
+  "description": "Materials intelligence across scales.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#07020f",
-  "theme_color": "#05020d",
+  "background_color": "#f2f4ef",
+  "theme_color": "#f2f4ef",
   "icons": [
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
   ]

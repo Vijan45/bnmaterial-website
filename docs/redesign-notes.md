@@ -1,23 +1,22 @@
-# BN Material root redesign
+# BN Material interface reconstruction
 
 ## Design direction
 
-The redesign replaces the previous narrow orbital/spectra visual language with a restrained materials-atlas system. Motion is tied to recognizable materials phenomena and remains inside defined interface frames.
+The new interface replaces the previous overlapping neon theme with a coherent materials-intelligence system. The visual language combines editorial spacing, instrument-grade data panels, geometric material structures, precise typography, and restrained motion.
 
-### Scientific animation set
+Key changes:
 
-- defect-mediated crack closure in a conceptual self-healing crystal lattice
-- molecular-dynamics trajectories and thermal particle motion
-- heterojunction band alignment and carrier transfer
-- photovoltaic photon capture and charge extraction
-- polymer-chain stretching and viscoelastic response
-- grain nucleation and microstructural evolution
-
-All motion respects `prefers-reduced-motion`.
+- warm technical surfaces with an optional dark mode
+- a new geometric BN lattice-cell identity
+- interactive materials-field canvas in the homepage hero
+- responsive domain atlas with twelve distinct scientific icons
+- high-detail conceptual software workspaces for spectroscopy, microscopy, and thermal analysis
+- consistent page architecture for research, information, software, contact, and legal routes
+- subtle scroll reveals, card spotlights, tilt response, progress indication, and accessible reduced-motion behavior
 
 ## Materials-engineering coverage
 
-The information architecture now includes twelve connected domains:
+The information architecture includes twelve connected domains:
 
 1. Crystal Engineering & Self-Healing Materials
 2. Computational Materials & Molecular Dynamics
@@ -32,32 +31,41 @@ The information architecture now includes twelve connected domains:
 11. Characterization & Materials Informatics
 12. Manufacturing & Process Engineering
 
-## Brand system
-
-The new BN Material identity uses a faceted hexagonal lattice, node markers, and an integrated BN monogram. Updated assets include:
+## Brand assets
 
 - `public/brand/bn-material-logo.svg`
 - `public/brand/bn-monogram-mono.svg`
 - `public/favicon.svg`
-- `public/social-preview.svg`
 - `public/og.png`
 
-## Pages rebuilt
+## Rebuilt surfaces
 
-- global header, mega navigation, mobile navigation, and footer
+- global header, mega navigation, mobile menu, theme control, and footer
 - homepage
-- research and general information pages
-- all topic index and detail pages
-- software catalogue and product detail pages
-- contact page
+- materials-domain index and all domain detail pages
+- software catalogue and all product detail pages
+- research and general information routes
+- contact experience
 - 404 page
 
-## Validation completed in the editing environment
+## Scientific and accessibility boundaries
 
-- TypeScript validation for `src/config/site.ts`
-- JavaScript syntax validation for all inline scripts
-- CSS brace and structure validation
-- XML parsing for all SVG brand assets
-- frontmatter-fence checks for Astro pages
+- Conceptual interface graphics are identified as concepts and are not presented as experimental data.
+- Product status, current capability, and planned capability remain separated.
+- Motion respects `prefers-reduced-motion`.
+- Keyboard focus, semantic navigation, responsive layout, and high-contrast states are preserved.
 
-A full Astro build could not be executed in the editing sandbox because the package registry was unavailable. Run the standard project checks in GitHub Actions or a network-enabled local environment before production deployment.
+## Validation
+
+Run the full project checks before deployment:
+
+```sh
+pnpm install
+pnpm lint
+pnpm format:check
+pnpm typecheck
+pnpm test
+pnpm test:e2e
+pnpm build
+pnpm check:links
+```

@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import ProductVisual from '../../components/ProductVisual.astro';
 import { products, site } from '../../config/site';
 
 export function getStaticPaths() {
@@ -22,104 +24,108 @@ const ld = {
 
 <Base title={product.name} description={product.summary}>
   <script type="application/ld+json" set:html={JSON.stringify(ld)} />
-  <section class:list={['product-page-hero', `accent-${product.accent}`]}>
-    <div class="shell product-page-hero-inner">
-      <div class="product-page-hero-copy" data-reveal>
-        <p class="eyebrow">BN software / 0{index + 1} / {product.category}</p>
+  <section class:list={['inner-hero', 'product-hero', `accent-${product.accent}`]}>
+    <div class="shell inner-hero-grid">
+      <div class="inner-hero-copy" data-reveal>
+        <span class="kicker">BN software / 0{index + 1} / {product.category}</span>
+        <div class="status-pill"><i></i>{product.status}</div>
         <h1>{product.name}</h1>
         <p>{product.summary}</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="/contact"><span>Discuss access</span><b>↗</b></a>
-          <a class="button button-outline" href="#capabilities"><span>Capabilities</span><b>↓</b></a
+          <a class="button button-accent" href="/contact"
+            ><span>Discuss access or collaboration</span><Icon name="arrow-up-right" size={17} /></a
+          ><a class="button button-ghost" href="#capabilities"
+            ><span>Review capabilities</span><Icon name="arrow-down" size={17} /></a
           >
         </div>
       </div>
-      <aside class="product-page-hero-aside" data-reveal>
-        <span>Development status</span>
-        <strong>{product.status}</strong>
-        <p>
-          Availability, platform support, versioning, and licensing are published only when
-          confirmed.
-        </p>
-      </aside>
-    </div>
-  </section>
-
-  <section class="product-workspace-section">
-    <div class="shell">
-      <div class="workspace-frame" data-reveal>
-        <div class="workspace-toolbar">
-          <small>BN MATERIAL / INTERFACE CONCEPT</small><strong>{product.name}</strong><small
-            >Scientific workspace</small
-          >
-        </div>
-        <aside class="workspace-sidebar">
-          <b>BN</b>
-          {
-            ['Import', 'Analyze', 'Annotate', 'Compare', 'Export'].map((item, i) => (
-              <span class:list={[{ active: i === 1 }]}>
-                <i>0{i + 1}</i>
-                {item}
-              </span>
-            ))
-          }
-        </aside>
-        <div class="workspace-main">
-          <div class="workspace-main-header">
-            <span>Primary analysis view</span><b>{product.category}</b>
-          </div>
-          <div class:list={['workspace-plot', product.visual]} aria-hidden="true">
-            {
-              product.visual === 'micrograph' &&
-                Array.from({ length: 20 }).map((_, i) => <i style={`--i:${i}`} />)
-            }
-          </div>
-        </div>
-        <aside class="workspace-inspector">
-          <span>Analysis parameters</span>
-          <label>Signal profile<i style="--value:78%"></i></label>
-          <label>Threshold<i style="--value:46%"></i></label>
-          <label>Resolution<i style="--value:67%"></i></label>
-          <p>
-            Conceptual interface visualization. It is not experimental data and does not establish
-            implemented capability.
-          </p>
-        </aside>
+      <div class="product-hero-visual" data-reveal>
+        <ProductVisual visual={product.visual} name={product.name} />
       </div>
     </div>
   </section>
 
-  <section class="page-section light" id="capabilities">
-    <div class="shell capability-list-layout">
-      <aside class="capability-list-intro" data-reveal>
-        <p class="micro-label">Scientific workflow</p>
+  <section class="section compact-top" id="capabilities">
+    <div class="shell product-capability-layout">
+      <aside class="sticky-intro" data-reveal>
+        <span class="kicker">Scientific workflow</span>
         <h2>Capability with visible boundaries.</h2>
         <p>
           Implemented positioning, roadmap items, access status, and scientific controls are
           separated so users can distinguish present functionality from future development.
         </p>
-        <a class="text-link" href="/contact">Contact BN Material <span>↗</span></a>
+        <a class="inline-link" href="/contact"
+          >Discuss this system <Icon name="arrow-up-right" size={16} /></a
+        >
       </aside>
-      <div class="capability-list-content">
-        <div data-reveal>
-          <span>01 / Current capability</span>
-          <h3>Core analysis environment</h3>
-          <ul>{product.features.map((feature) => <li>{feature}</li>)}</ul>
-        </div>
-        <div data-reveal>
-          <span>02 / Development roadmap</span>
-          <h3>Planned extensions</h3>
-          <ul>{product.planned.map((feature) => <li>{feature}</li>)}</ul>
-        </div>
-        <div data-reveal>
-          <span>03 / Release discipline</span>
-          <h3>Access, validation, and licensing</h3>
-          <p>
-            Public downloads are not presented until the executable, platform support,
-            documentation, version, validation status, and licensing terms are ready for review.
+      <div class="capability-panels">
+        <article data-reveal>
+          <div class="panel-index">01</div><span class="panel-icon"
+            ><Icon name={product.visual} size={26} /></span
+          ><h3>Core analysis environment</h3><ul>
+            {
+              product.features.map((feature) => (
+                <li>
+                  <Icon name="check" size={16} />
+                  {feature}
+                </li>
+              ))
+            }
+          </ul>
+        </article>
+        <article data-reveal>
+          <div class="panel-index">02</div><span class="panel-icon"
+            ><Icon name="process" size={26} /></span
+          ><h3>Development roadmap</h3><ul>
+            {
+              product.planned.map((feature) => (
+                <li>
+                  <Icon name="arrow-right" size={15} />
+                  {feature}
+                </li>
+              ))
+            }
+          </ul>
+        </article>
+        <article data-reveal>
+          <div class="panel-index">03</div><span class="panel-icon"
+            ><Icon name="shield" size={26} /></span
+          ><h3>Release discipline</h3><p>
+            Public downloads are not presented until executable quality, platform support,
+            documentation, versioning, validation status, and licensing terms are ready for review.
           </p>
-        </div>
+        </article>
       </div>
+    </div>
+  </section>
+
+  <section class="section product-principles">
+    <div class="shell principles-grid product-principles-grid">
+      <article class="principle-lead" data-reveal>
+        <span class="kicker">Interface principles</span><h2>
+          Scientific control remains visible.
+        </h2><p>
+          Automation should accelerate analysis without erasing the reasoning required to defend the
+          result.
+        </p>
+      </article>
+      <article class="principle-card" data-reveal>
+        <Icon name="signal" size={29} /><h3>Manual scientific correction</h3><p>
+          Critical labels, thresholds, baselines, regions, and assignments remain reviewable.
+        </p>
+      </article>
+      <article class="principle-card" data-reveal>
+        <Icon name="database" size={29} /><h3>Structured outputs</h3><p>
+          Figures, tables, annotations, settings, and project state are treated as connected
+          records.
+        </p>
+      </article>
+      <article class="principle-card" data-reveal>
+        <Icon name="shield" size={29} /><h3>Conservative claims</h3><p>
+          Concept interfaces do not establish implemented capability; status and roadmap remain
+          explicit.
+        </p>
+      </article>
     </div>
   </section>
 </Base>

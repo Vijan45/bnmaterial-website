@@ -16,20 +16,20 @@ The account has repository admin access. Vulnerability alerts, automated securit
 
 ## Deployment and repository baseline
 
-| Item                            | Audited state                                                |
-| ------------------------------- | ------------------------------------------------------------ |
-| Visibility                      | Public                                                       |
-| Default/production branch       | `main`                                                       |
-| GitHub Pages                    | Enabled; status `built`; build type `workflow`               |
-| Pages source                    | `main`, repository root                                      |
-| Pages URL                       | `https://bnmaterial.com/`                                    |
-| Custom domain                   | `bnmaterial.com`                                             |
-| HTTPS enforcement               | Enabled                                                      |
-| Repository CNAME files          | `/CNAME` and `/public/CNAME`, both `bnmaterial.com`          |
-| Deployment environment          | `github-pages`, restricted by branch policy                  |
-| Latest recorded deployment      | Successful GitHub Pages deployment from `main`               |
-| Cloudflare Pages                | Connected for preview checks; not the active production host |
-| External DNS/Cloudflare changes | None                                                         |
+| Item                            | Audited state                                                        |
+| ------------------------------- | -------------------------------------------------------------------- |
+| Visibility                      | Public                                                               |
+| Default/production branch       | `main`                                                               |
+| GitHub Pages                    | Enabled; status `built`; build type `workflow`                       |
+| Pages source                    | `main`, repository root                                              |
+| Pages URL                       | `https://bnmaterial.com/`                                            |
+| Custom domain                   | `bnmaterial.com`                                                     |
+| HTTPS enforcement               | Enabled                                                              |
+| Repository CNAME files          | `/CNAME` and `/public/CNAME`, both `bnmaterial.com`                  |
+| Deployment environments         | `github-pages`; empty `copilot` environment created during PR checks |
+| Latest recorded deployment      | Successful GitHub Pages deployment from `main`                       |
+| Cloudflare Pages                | Connected for preview checks; not the active production host         |
+| External DNS/Cloudflare changes | None                                                                 |
 
 Live checks found the GitHub Pages IPv4 addresses on the apex and `www.bnmaterial.com` pointing to `vijan45.github.io`. HTTP response headers identified `GitHub.com` as the server. The apex returned HTTP 200 over HTTPS and `www` redirected to the apex.
 
@@ -44,7 +44,7 @@ Current workflows:
 
 The most recent `CI`, Pages deployment, and CodeQL runs audited on 2026-07-28 completed successfully. The default workflow token permission is read-only, and workflows cannot approve pull-request reviews. The Pages deployment workflow retains its explicit `pages: write` and `id-token: write` job permissions.
 
-The repository has one deployment environment (`github-pages`) and no repository webhooks. Check-run metadata identifies `Cloudflare Workers and Pages`, `GitGuardian`, `GitHub Actions`, and `GitHub Advanced Security` integrations. A full installation-level GitHub App inventory could not be enumerated: the authenticated OAuth token has repository administration scopes, but the installations endpoint returned HTTP 403 because it was not authorized to a GitHub App. No integrations were removed or changed.
+The repository began the audit with one deployment environment (`github-pages`) and has no repository webhooks. GitHub automatically created an empty `copilot` environment when pull-request checks began; it has no protection rules or deployment branch policy and was preserved. Check-run metadata identifies `Cloudflare Workers and Pages`, `GitGuardian`, `GitHub Actions`, and `GitHub Advanced Security` integrations. A full installation-level GitHub App inventory could not be enumerated: the authenticated OAuth token has repository administration scopes, but the installations endpoint returned HTTP 403 because it was not authorized to a GitHub App. No integrations were removed or changed.
 
 ## Security controls and findings
 
@@ -73,16 +73,17 @@ No exposed credential was identified, so no rotation action is currently indicat
 
 ## Branch policy and administrative changes
 
-| Setting                  | Before       | After                                                                  |
-| ------------------------ | ------------ | ---------------------------------------------------------------------- |
-| Production ruleset       | None         | Active `Protect production branch` ruleset targeting `refs/heads/main` |
-| Branch deletion          | Not blocked  | Blocked by ruleset                                                     |
-| Force pushes             | Not blocked  | Blocked by ruleset                                                     |
-| Pull requests            | Not required | Required with 0 approvals                                              |
-| Review-thread resolution | Not required | Required                                                               |
-| Linear history           | Not required | Unchanged; existing history contains a merge commit                    |
-| Required status checks   | None         | Unchanged to avoid introducing a new deployment gate                   |
-| Delete merged branches   | Disabled     | Enabled                                                                |
+| Setting                  | Before         | After                                                                       |
+| ------------------------ | -------------- | --------------------------------------------------------------------------- |
+| Production ruleset       | None           | Active `Protect production branch` ruleset targeting `refs/heads/main`      |
+| Branch deletion          | Not blocked    | Blocked by ruleset                                                          |
+| Force pushes             | Not blocked    | Blocked by ruleset                                                          |
+| Pull requests            | Not required   | Required with 0 approvals                                                   |
+| Review-thread resolution | Not required   | Required                                                                    |
+| Linear history           | Not required   | Unchanged; existing history contains a merge commit                         |
+| Required status checks   | None           | Unchanged to avoid introducing a new deployment gate                        |
+| Delete merged branches   | Disabled       | Enabled                                                                     |
+| Deployment environments  | `github-pages` | `github-pages` plus empty `copilot`, created automatically during PR checks |
 
 The ruleset does not require an outside reviewer or approval, so the repository owner can merge their own pull request after resolving any conversations. It does not change the Pages source or current deployment.
 

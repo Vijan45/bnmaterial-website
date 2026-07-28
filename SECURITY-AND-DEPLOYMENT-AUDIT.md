@@ -10,26 +10,26 @@ This report is sanitized. It contains no tokens, repository-secret values, webho
 
 ## Executive summary
 
-The repository is public and publishes `https://bnmaterial.com/` through GitHub Pages. Live DNS and response headers identify GitHub Pages as the active host, so GitHub Pages, repository visibility, the custom domain, and both `CNAME` files were preserved.
+The repository is public and publishes `https://bnmaterial.com/` through GitHub Pages. Live DNS and response headers identify GitHub Pages as the active production host, so GitHub Pages, repository visibility, the custom domain, and both `CNAME` files were preserved. Cloudflare Pages is connected and produced a successful pull-request preview check, but it is not the custom-domain production host.
 
 The account has repository admin access. Vulnerability alerts, automated security updates, CodeQL default setup, secret scanning, push protection, and read-only default Actions permissions were already enabled. The audit added a production-branch ruleset and automatic deletion of merged feature branches directly in repository settings. File hardening is proposed on `chore/repository-security-hardening`.
 
 ## Deployment and repository baseline
 
-| Item                            | Audited state                                       |
-| ------------------------------- | --------------------------------------------------- |
-| Visibility                      | Public                                              |
-| Default/production branch       | `main`                                              |
-| GitHub Pages                    | Enabled; status `built`; build type `workflow`      |
-| Pages source                    | `main`, repository root                             |
-| Pages URL                       | `https://bnmaterial.com/`                           |
-| Custom domain                   | `bnmaterial.com`                                    |
-| HTTPS enforcement               | Enabled                                             |
-| Repository CNAME files          | `/CNAME` and `/public/CNAME`, both `bnmaterial.com` |
-| Deployment environment          | `github-pages`, restricted by branch policy         |
-| Latest recorded deployment      | Successful GitHub Pages deployment from `main`      |
-| Cloudflare Pages                | Not evidenced as the active deployment              |
-| External DNS/Cloudflare changes | None                                                |
+| Item                            | Audited state                                                |
+| ------------------------------- | ------------------------------------------------------------ |
+| Visibility                      | Public                                                       |
+| Default/production branch       | `main`                                                       |
+| GitHub Pages                    | Enabled; status `built`; build type `workflow`               |
+| Pages source                    | `main`, repository root                                      |
+| Pages URL                       | `https://bnmaterial.com/`                                    |
+| Custom domain                   | `bnmaterial.com`                                             |
+| HTTPS enforcement               | Enabled                                                      |
+| Repository CNAME files          | `/CNAME` and `/public/CNAME`, both `bnmaterial.com`          |
+| Deployment environment          | `github-pages`, restricted by branch policy                  |
+| Latest recorded deployment      | Successful GitHub Pages deployment from `main`               |
+| Cloudflare Pages                | Connected for preview checks; not the active production host |
+| External DNS/Cloudflare changes | None                                                         |
 
 Live checks found the GitHub Pages IPv4 addresses on the apex and `www.bnmaterial.com` pointing to `vijan45.github.io`. HTTP response headers identified `GitHub.com` as the server. The apex returned HTTP 200 over HTTPS and `www` redirected to the apex.
 
@@ -44,7 +44,7 @@ Current workflows:
 
 The most recent `CI`, Pages deployment, and CodeQL runs audited on 2026-07-28 completed successfully. The default workflow token permission is read-only, and workflows cannot approve pull-request reviews. The Pages deployment workflow retains its explicit `pages: write` and `id-token: write` job permissions.
 
-The repository has one deployment environment (`github-pages`) and no repository webhooks. GitHub App installations could not be enumerated: the authenticated OAuth token has repository administration scopes but the installations endpoint returned HTTP 403 because it was not authorized to a GitHub App. No integrations were removed or changed.
+The repository has one deployment environment (`github-pages`) and no repository webhooks. Check-run metadata identifies `Cloudflare Workers and Pages`, `GitGuardian`, `GitHub Actions`, and `GitHub Advanced Security` integrations. A full installation-level GitHub App inventory could not be enumerated: the authenticated OAuth token has repository administration scopes, but the installations endpoint returned HTTP 403 because it was not authorized to a GitHub App. No integrations were removed or changed.
 
 ## Security controls and findings
 
@@ -116,4 +116,4 @@ The following commands completed successfully on this branch:
 - Linear history was not required because the reachable history includes a merge commit and all three merge methods are enabled.
 - Status checks were not added to the ruleset; existing CI remains active but is not made a new production gate.
 - Secret-scanning non-provider patterns and validity checks remain disabled because they were not requested and may depend on plan or feature availability.
-- GitHub App installation inventory requires a token authorized to a GitHub App and could not be completed through the authenticated CLI token.
+- Check-run providers were recorded, but a full GitHub App installation inventory requires a token authorized to a GitHub App and could not be completed through the authenticated CLI token.
